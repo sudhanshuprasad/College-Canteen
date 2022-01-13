@@ -45,6 +45,7 @@ li a:hover {
   padding: 20px;
   background-color: rgb(240, 118, 87);
   color: #fff;
+  
 }
 .logo{
   font-size: 32px;
@@ -52,9 +53,9 @@ li a:hover {
 
 .menu{
   display: flex;
-  gap:1em;
+  gap: 1em;
   font-size: 18px;
-  list-style: none;
+  list-style-type: none;
 }
 .menu li:hover{
   background-color: #f1654c;
@@ -65,5 +66,6 @@ li a:hover {
   padding: 5px 14px;
 }
 .nav-links a{
+  text-decoration: none;
   color: #fff;
 }

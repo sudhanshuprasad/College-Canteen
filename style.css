@@ -8,7 +8,7 @@
   padding: 0;
   overflow: hidden;
   background-color: #333;
-  position: -webkit-sticky; /* Safari *//*
+  position: -webkit-sticky; 
   position: sticky;
   top: 0;
   border: 0;
@@ -38,14 +38,19 @@ li a:hover {
 
 
 
+.nav-div{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
 .navbar{
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
   background-color: rgb(240, 118, 87);
   color: #fff;
-  
 }
 .logo{
   font-size: 32px;

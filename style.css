@@ -44,6 +44,7 @@ li a:hover {
   top: 0;
 }
 .navbar{
+  height: 30px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -63,7 +64,7 @@ li a:hover {
   list-style-type: none;
 }
 .menu li:hover{
-  background-color: #f1654c;
+  background-color: #ff3232;
   border-radius: 50px;
   transition: 0.3s ease;
 }
@@ -73,4 +74,34 @@ li a:hover {
 .nav-links a{
   text-decoration: none;
   color: #fff;
+}
+
+.dropdown{
+  padding: len 0;
+  display: none;
+  position: absolute;
+  text-decoration: none;
+  list-style: none;
+  border-radius: 8px;
+  /* top: 25px; */
+  right: 15px;
+  background-color: rgb(167, 81, 59);
+}
+.dropdown li + li{
+  margin-top: 10px;
+}
+.dropdown li{
+  padding: 0.5em 1em;
+  width: 8em;
+  text-align: center;
+}
+.dropdown li:hover{
+  background-color: brown;
+}
+.more:hover .dropdown{
+  display: block;
+}
+.more{
+  padding: 0px;
+  margin: 0px;
 }

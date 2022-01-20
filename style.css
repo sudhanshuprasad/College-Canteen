@@ -50,11 +50,16 @@ li a:hover {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: rgb(240, 118, 87);
+  background-color: rgb(46, 17, 10);
   color: #fff;
 }
 .logo{
   font-size: 32px;
+}
+.logo-icon{
+  height: 30px;
+  width: 40px;
+  object-fit: cover;
 }
 
 .menu{
@@ -64,7 +69,7 @@ li a:hover {
   list-style-type: none;
 }
 .menu li:hover{
-  background-color: #ff3232;
+  background-color: #521111;
   border-radius: 50px;
   transition: 0.3s ease;
 }
@@ -83,25 +88,37 @@ li a:hover {
   text-decoration: none;
   list-style: none;
   border-radius: 8px;
-  /* top: 25px; */
-  right: 15px;
-  background-color: rgb(167, 81, 59);
+  /* top: 55px; */
+  right: 5px;
+  padding-right: 10px;
+  background-color: rgb(133, 44, 9);
 }
 .dropdown li + li{
   margin-top: 10px;
 }
 .dropdown li{
+  /* list-style: none; */
   padding: 0.5em 1em;
   width: 8em;
   text-align: center;
 }
 .dropdown li:hover{
-  background-color: brown;
+  background-color: #521111;
+  ;
 }
 .more:hover .dropdown{
   display: block;
+
 }
 .more{
   padding: 0px;
   margin: 0px;
+}
+input[type=checkbox]{
+  display: none;
+}
+.hamburger{
+  display: none;
+  font-size: 24px;
+  user-select: none;
 }

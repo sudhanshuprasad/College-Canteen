@@ -36,15 +36,37 @@ li a:hover {
   background-color: #ff4646;
 } */
 
+#headerbg{
+  /* acbkground-image: url("images/food_items/headerbgimage.jpg");
+  background-repeat: repeat; */
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  object-fit: cover;
+  height: 20%;
+  opacity: 0.5;
+  z-index: -1;
+}
 
+/* .headerbg{
+  background-image: url("images/food_items/headerbgimage.jpg");
+  background-repeat: repeat;
+  margin: auto;
+  opacity: 0.5;
+} */
+.header{
+  opacity: 1;
+  color: rgb(56, 6, 6);
+}
 
 .nav-div{
   position: sticky;
   position: -webkit-sticky;
   top: 0;
+  z-index: 1;
 }
 .navbar{
-  height: 30px;
+  /* height: 30px; */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -121,4 +143,10 @@ input[type=checkbox]{
   display: none;
   font-size: 24px;
   user-select: none;
+}
+
+
+/* the bootstrap cards under the navbar */
+.cards{
+
 }

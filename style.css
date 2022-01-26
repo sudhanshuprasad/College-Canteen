@@ -43,7 +43,7 @@ li a:hover {
   margin: auto;
   width: 100%;
   object-fit: cover;
-  height: 20%;
+  height: 100px;
   opacity: 0.5;
   z-index: -1;
 }
@@ -54,10 +54,22 @@ li a:hover {
   margin: auto;
   opacity: 0.5;
 } */
+
+
+/* header */
+
 .header{
   opacity: 1;
   color: rgb(56, 6, 6);
 }
+.header h1{
+  text-align: center;
+}
+.header p{
+  text-align: center;
+}
+
+/* navbar */
 
 .nav-div{
   position: sticky;
@@ -99,6 +111,10 @@ li a:hover {
   padding: 5px 14px;
 }
 .nav-links a{
+  text-decoration: none;
+  color: #fff;
+}
+.nav-links a:hover{
   text-decoration: none;
   color: #fff;
 }
@@ -146,7 +162,43 @@ input[type=checkbox]{
 }
 
 
+/* media quary for navbar */
+
+@media (max-width: 768px) {
+  .menu{
+    display: none;
+    position: absolute;
+    padding: 16px 0;
+    text-align: center;
+  }
+  .menu li:hover{
+    display: inline-block;
+    background-color: rgb(8, 106, 218);
+    transition: 0.3s ease;
+  }
+  .menu li+li{
+    margin-top: 10px;
+  }
+  input[type=checkbox]:checked ~.menu{
+    display: block;
+  }
+  .hamburger{
+    display: block;
+  }
+  .dropdown{
+    left: 50%;
+    top: 30px;
+    transform: translateX(35%);
+  }
+}
+
 /* the bootstrap cards under the navbar */
 .cards{
-
+  margin-top: 20px;
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(290px,290px));
+  justify-content: space-around;
+  
+  
 }

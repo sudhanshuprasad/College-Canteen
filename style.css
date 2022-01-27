@@ -43,7 +43,7 @@ li a:hover {
   margin: auto;
   width: 100%;
   object-fit: cover;
-  height: 100px;
+  height: 188px;
   opacity: 0.5;
   z-index: -1;
 }
@@ -142,11 +142,9 @@ li a:hover {
 }
 .dropdown li:hover{
   background-color: #521111;
-  ;
 }
 .more:hover .dropdown{
   display: block;
-
 }
 .more{
   padding: 0px;
@@ -200,5 +198,10 @@ input[type=checkbox]{
   grid-template-columns: repeat(auto-fit, minmax(290px,290px));
   justify-content: space-around;
   
-  
+}
+.card{
+  min-width: 200px;
+}
+.card:hover{
+  box-shadow: 5px 5px 30px;
 }

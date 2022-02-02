@@ -1,6 +1,6 @@
 .grid-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit,300px);
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
     grid-gap: 30px;
     justify-content: center;
 }
@@ -35,7 +35,7 @@
     border-radius: 5px;
 }
 .item a:hover{
-    background-color: #3d0d0d;
+    background-color: #310a0a;
 }
 .item_name{
     padding: 0px;

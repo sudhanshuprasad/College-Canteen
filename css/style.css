@@ -57,8 +57,16 @@ li a:hover {
 .header h1{
   text-align: center;
 }
-.header p{
+.header h2{
   text-align: center;
+}
+h3{
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+h5{
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 /* navbar */
@@ -190,7 +198,7 @@ input[type=checkbox]{
 }
 
 /* the bootstrap cards under the navbar */
-
+/* 
 .cards{
   margin-top: 20px;
   display: grid;
@@ -204,4 +212,53 @@ input[type=checkbox]{
 }
 .card:hover{
   box-shadow: 5px 5px 30px;
+} */
+
+/* food items without bootstrap */
+
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  grid-gap: 30px;
+  justify-content: center;
+  padding: 30px;
+}
+.item{
+  border: 10px solid black;
+  border-radius: 5px;
+}
+.item:hover{
+  box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.53);
+}
+.item img{
+  height: 225px;
+  width: 100%;
+  object-fit: cover;
+}
+.item *{
+  padding: 0px;
+  margin: 0px;
+}
+.content{
+  padding: 15px;
+  margin: 0px;
+}
+.item a{
+  display: inline-block;
+  background-color: #521111;
+  color: #fff;
+  padding: .375rem .75rem;
+  margin-top: 10px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.item a:hover{
+  background-color: #310a0a;
+}
+.item_name{
+  padding: 0px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }

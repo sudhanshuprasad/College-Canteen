@@ -37,7 +37,7 @@ li a:hover {
 } */
 
 #headerbg{
-  /* acbkground-image: url("images/food_items/headerbgimage.jpg");
+  /* background-image: url("images/food_items/headerbgimage.jpg");
   background-repeat: repeat; */
   position: absolute;
   margin: auto;
@@ -179,24 +179,29 @@ input[type=checkbox]{
     position: absolute;
     padding: 16px 0;
     text-align: center;
+    background-color: #310a0a;
+    right: 0px;
+    width: 100%;
   }
   .menu li:hover{
     display: inline-block;
-    background-color: rgb(8, 106, 218);
+    background-color: rgb(17, 69, 129);
     transition: 0.3s ease;
   }
   .menu li+li{
     margin-top: 10px;
   }
-  input[type=checkbox]:checked ~.menu{
+  input[type=checkbox]:checked ~ .menu{
     display: block;
   }
   .hamburger{
+    position: relative;
     display: block;
   }
   .dropdown{
     left: 50%;
     top: 30px;
+    width: 200px;
     transform: translateX(35%);
   }
 }

@@ -1,44 +1,4 @@
-/* body {
-  font-size: 28px;
-}
-
-.nav-bar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  position: -webkit-sticky; 
-  position: sticky;
-  top: 0;
-  border: 0;
-}
-
-@media (min-width: 768px) {
-  li a {
-    float: left;
-  }
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-.active {
-  background-color: #ff4646;
-} */
-
 #headerbg{
-  /* background-image: url("images/food_items/headerbgimage.jpg");
-  background-repeat: repeat; */
   position: absolute;
   margin: auto;
   width: 100%;
@@ -186,7 +146,7 @@ input[type=checkbox]{
   .menu li:hover{
     display: inline-block;
     background-color: #521111;
-    transition: 0.3s ease;
+    transition: 0.5s ease;
   }
   .menu li+li{
     margin-top: 10px;
@@ -215,12 +175,13 @@ input[type=checkbox]{
   .navbar{
     padding: 10px;
   }
-  /* .dropdown li:hover{
-    background-color: rgb(133, 44, 9);
-  } */
-  /* .more:hover .menu{
-    text-align: center;
-  } */
+  footer{
+    display: flex;
+    flex-direction: column;
+  }
+  footer p{
+    margin: 10px;
+  }
 }
 
 /* media quarry for even thinner devices */
@@ -232,22 +193,6 @@ input[type=checkbox]{
   }
 }
 
-/* the bootstrap cards under the navbar */
-/* 
-.cards{
-  margin-top: 20px;
-  display: grid;
-  grid-gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(290px,1fr));
-  justify-content: space-around;
-  
-}
-.card{
-  min-width: 200px;
-}
-.card:hover{
-  box-shadow: 5px 5px 30px;
-} */
 
 /* food items without bootstrap */
 
@@ -261,9 +206,12 @@ input[type=checkbox]{
 .item{
   border: 10px solid black;
   border-radius: 5px;
+  transition: 0.5s;
 }
 .item:hover{
   box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.53);
+  transform: scale(1.02);
+  /* transform: translateY(-10px); */
 }
 .item img{
   height: 225px;
@@ -296,4 +244,17 @@ input[type=checkbox]{
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+/* footer */
+footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: small;
+}
+footer p{
+  text-align: center;
+  margin-left: 50px;
+  margin-right: 50px;
 }

@@ -206,7 +206,7 @@ input[type=checkbox]{
 .item{
   border: 10px solid black;
   border-radius: 5px;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .item:hover{
   box-shadow: 5px 5px 20px 7px rgba(0,0,0,0.53);

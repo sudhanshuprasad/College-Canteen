@@ -1,0 +1,28 @@
+.cartitem{
+    border: 5px solid rgb(66, 66, 66);
+    margin: 10px;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start;
+}
+.cartitem h3,h2{
+    margin: 0px;
+    /* width: max-content; */
+}
+.cartitem_content{
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.cartItem_image{
+    height: 3.5rem;
+    width: fit-content;
+}
+.cartItem_image img{
+    height: 100%;
+    width: 3.5rem;
+}
+.cartitem_name{
+    font-size: small;
+}

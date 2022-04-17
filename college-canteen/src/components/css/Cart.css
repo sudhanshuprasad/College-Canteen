@@ -6,6 +6,7 @@
     text-align: center;
     font-size: large;
     padding-left: 40px;
+    margin: 16px;
 }
 .cart{
     overflow: auto;

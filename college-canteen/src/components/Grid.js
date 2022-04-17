@@ -4,7 +4,7 @@ import "./css/Grid.css";
 
 const host="http://127.0.0.1:5000";
 
-export default function Grid(props) {
+export default function Grid() {
   
   //get food items
   const [foodItem, setFoodItem]=useState([]);
@@ -29,8 +29,8 @@ export default function Grid(props) {
       {
         foodItem.map((element) => (
           <Card
-            key={element.key}
-            num={element.num}
+            key={element._id}
+            num={element._id}
             imgurl="https://picsum.photos/60"
             foodName={element.name}
             price={element.price}

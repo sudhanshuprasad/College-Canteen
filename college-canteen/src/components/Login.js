@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './css/Login.css'
 
 const host = "http://127.0.0.1:5000";
+let login=false;
+
 
 let LoginVisiblity = 0;
 export function toggleLoginVisiblity() {
@@ -13,7 +15,7 @@ export function toggleLoginVisiblity() {
     else {
         document.getElementById("login-parent").classList.add('active');
     }
-    console.log("visiblity set to " + LoginVisiblity);
+    // console.log("visiblity set to " + LoginVisiblity);
     return LoginVisiblity;
 }
 
@@ -25,8 +27,6 @@ function handlelogin() {
         // "email": "mymail@gmail.com",
         // "password": "fcukyou"
     }
-    console.log(document.getElementById("password").value)
-    console.log(credentials.password);
 
     fetch(url, {
         method: 'POST',
@@ -36,8 +36,15 @@ function handlelogin() {
         },
         body: JSON.stringify(credentials)
     })
+    .then(response => {
+        login=true;
+        return response.json()
+    })
+    .then(data => {
+        localStorage.setItem('authToken', data.authToken);
+    })
     .then(()=>{
-        console.log("fetch completed")
+        console.log(localStorage.getItem('authToken'));
     });
 
 }

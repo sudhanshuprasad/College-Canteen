@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './css/Login.css'
 
@@ -6,18 +7,6 @@ const host = "http://127.0.0.1:5000";
 let login=false;
 
 
-let LoginVisiblity = 0;
-export function toggleLoginVisiblity() {
-    LoginVisiblity = !LoginVisiblity;
-    if (LoginVisiblity) {
-        document.getElementById("login-parent").classList.remove('active');
-    }
-    else {
-        document.getElementById("login-parent").classList.add('active');
-    }
-    // console.log("visiblity set to " + LoginVisiblity);
-    return LoginVisiblity;
-}
 
 function handlelogin() {
     const url = `${host}/api/auth/login`;
@@ -27,7 +16,7 @@ function handlelogin() {
         // "email": "mymail@gmail.com",
         // "password": "fcukyou"
     }
-
+    
     fetch(url, {
         method: 'POST',
         headers: {
@@ -46,18 +35,19 @@ function handlelogin() {
     .then(()=>{
         console.log(localStorage.getItem('authToken'));
     });
-
+    
 }
 
-export default function Login(props) {
-
+export default function Login() {
+    
+    
     return (
-        <div id='login-parent' className='active'>
-            <div className='transparent' onClick={toggleLoginVisiblity}>
+        <div id='login-parent' /* className='active' */>
+            <div /* className='transparent' */ /* onClick={toggleLoginVisiblity} */>
             </div>
             <div className='login-container'>
                 <div className='login'>
-                    <div id="close-btn" onClick={toggleLoginVisiblity}>&#x2715; </div>
+                    <div id="close-btn" /* onClick={toggleLoginVisiblity} */>&#x2715; </div>
                     <div>
                         <label htmlFor='User_ID'>Enter ID:</label><br />
                         <input type="text" name='User_ID' id='User_Id' placeholder='User ID'></input><br />
@@ -67,7 +57,8 @@ export default function Login(props) {
                         <input type="password" name="password" id="password" placeholder='Password'></input><br />
                     </div>
                     <div>
-                        <button onClick={handlelogin}>Login</button><br />
+                        <button onClick={handlelogin}>Login</button>
+                        <br />
                     </div>
                     <div>
                         <p>New User?</p>

@@ -6,19 +6,6 @@ import CartList from './CartList';
 const host = "http://127.0.0.1:5000";
 
 
-let CartVisiblity = 0;
-export function toggleCartVisiblity() {
-    CartVisiblity = !CartVisiblity;
-    if (CartVisiblity) {
-        document.getElementById("cart-parent").classList.remove('active');
-    }
-    else {
-        document.getElementById("cart-parent").classList.add('active');
-    }
-    // console.log("Cart visiblity set to " + CartVisiblity);
-    return CartVisiblity;
-}
-
 export default function Cart() {
 
     //get food items in the cart
@@ -67,12 +54,12 @@ export default function Cart() {
     }, [cartItem])
 
     return (
-        <div id='cart-parent' className='active'>
-            <div className='transparentForCart' onClick={toggleCartVisiblity}>
+        <div id='cart-parent' /* className='active' */>
+            <div className='transparentForCart' /* onClick={toggleCartVisiblity} */>
             </div>
             <div className='cart-container'>
                 <div className='cart'>
-                    <button id="cart-close-btn" onClick={toggleCartVisiblity}>&#x2715;</button>
+                    <button id="cart-close-btn" /* onClick={toggleCartVisiblity} */>&#x2715;</button>
                     <div className='cart-head'><h2>Items in your cart</h2></div>
                     <div>
                         <CartList items={cartItem.items} />

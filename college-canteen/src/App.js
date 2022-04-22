@@ -1,12 +1,23 @@
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Grid from './components/Grid';
+import Signup from './components/Signup';
+import Cart from './components/Cart';
+import Login from './components/Login';
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Grid />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/home" element={<Grid/>} />
+          <Route path="/cart" element={<Cart/>} />
+          <Route path="/login" element={<Login/>} />
+        </Routes>
+      </BrowserRouter>
     </>
     // <div className="App">
     //   {/* <header className="App-header">

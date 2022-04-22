@@ -31,7 +31,7 @@ function updateCart(foodID) {
       }
       let pushNewItem=true;
       for (let _id in cartItem){
-        if(cartItem[_id]._id==foodID){
+        if(cartItem[_id]._id===foodID){
           cartItem[_id].quantity++;
           pushNewItem=false;
           console.log("quantity= "+cartItem[_id].quantity);

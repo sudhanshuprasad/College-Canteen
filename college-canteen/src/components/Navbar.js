@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // console.log(Boolean(localStorage.getItem('authToken')))
-console.log(localStorage.getItem('authToken'))
+// console.log(localStorage.getItem('authToken'))
 
 export default function Navbar() {
     const [login, SetLogin]= useState([Boolean(localStorage.getItem('authToken'))]);

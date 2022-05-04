@@ -32,7 +32,7 @@ export default function CartItem(props) {
                     <h3>&#8377;{item.price}</h3>
                 </div>
                 <div className="quantity">
-                    <h2>{props.quantity}</h2>
+                    <h2>Quantity: {props.quantity}</h2>
                 </div>
             </div>
         </div>

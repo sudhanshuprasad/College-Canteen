@@ -19,6 +19,7 @@
   .content{
     padding: 15px;
     margin: 0px;
+    height: auto;
   }
   .item button{
     display: inline-block;

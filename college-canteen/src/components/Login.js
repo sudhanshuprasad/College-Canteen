@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './css/Login.css'
 
 const host = "http://127.0.0.1:5000";
-let login=false;
-
 
 
 function handlelogin() {
@@ -26,7 +24,7 @@ function handlelogin() {
         body: JSON.stringify(credentials)
     })
     .then(response => {
-        login=true;
+        // setLogin(true);
         return response.json()
     })
     .then(data => {
@@ -40,6 +38,7 @@ function handlelogin() {
 
 export default function Login() {
     
+    const [login, SetLogin]=useState(false);
     
     return (
         <div id='login-parent' /* className='active' */>
@@ -47,7 +46,6 @@ export default function Login() {
             </div>
             <div className='login-container'>
                 <div className='login'>
-                    <div id="close-btn" /* onClick={toggleLoginVisiblity} */>&#x2715; </div>
                     <div>
                         <label htmlFor='User_ID'>Enter ID:</label><br />
                         <input type="text" name='User_ID' id='User_Id' placeholder='User ID'></input><br />
@@ -62,7 +60,7 @@ export default function Login() {
                     </div>
                     <div>
                         <p>New User?</p>
-                        {/* <Link to="/" >Sign Up</Link> */}
+                        <Link to="/signup" >Sign Up</Link>
                     </div>
                 </div>
             </div>

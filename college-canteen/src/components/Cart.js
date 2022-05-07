@@ -44,7 +44,7 @@ export default function Cart() {
             })
             .then(data => {
                 // console.log("after fetch ");
-                // console.log(data);
+                console.log(data[0].items);
                 setCartItem(data[0].items);
                 setLoaidng(false);
             })

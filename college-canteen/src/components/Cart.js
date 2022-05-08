@@ -49,7 +49,7 @@ export default function Cart() {
                 setLoaidng(false);
             })
             .catch(() => {
-                console.log("some error occured while fetching GET request")
+                // console.log("some error occured while fetching GET request")
             });
             
         }, [])
@@ -60,6 +60,7 @@ export default function Cart() {
         return (
             cartItem?.map((element) => (
                 <>
+                    {/* {console.log(element._id)} */}
                     <CartItem
                         key={element._id}
                         id={element._id}
@@ -74,34 +75,4 @@ export default function Cart() {
         )
     }
 
-    // return (
-    //     <div /* id='cart-parent' className='active' */>
-    //         <div className='transparentForCart' /* onClick={toggleCartVisiblity} */>
-    //         </div>
-    //         <div className='cart-container'>
-    //             <div className='cart'>
-    //                 <button id="cart-close-btn" /* onClick={toggleCartVisiblity} */>&#x2715;</button>
-    //                 <div className='cart-head'><h2>Items in your cart</h2></div>
-    //                 <div>
-
-    //                     {
-    //                         cartItem.items.map((element) => (
-    //                             <>
-    //                             {/* {console.log(element)} */}
-    //                             <CartItem
-    //                                 key={element._id}
-    //                                 id={element._id}
-    //                                 quantity={element.quantity}
-    //                             />
-    //                             </>
-    //                         ))
-    //                     }
-
-    //                     {/* <CartList/> */}
-    //                     {/* {!loaidng?<CartList items={cartItem.items} />:<></>} */}
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
 }

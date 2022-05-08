@@ -1,10 +1,10 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Link, useNavigate } from 'react-router-dom';
 import './css/Login.css'
 
 const host = "http://127.0.0.1:5000";
-
 
 function handlelogin() {
     const url = `${host}/api/auth/login`;
@@ -28,6 +28,9 @@ function handlelogin() {
         return response.json()
     })
     .then(data => {
+        if(data.error){
+            console.log(data.error)
+        }
         localStorage.setItem('authToken', data.authToken);
     })
     .then(()=>{
@@ -38,11 +41,19 @@ function handlelogin() {
 
 export default function Login() {
     
-    const [login, SetLogin]=useState(false);
+    const [login, setLogin]=useState(false);
+    const navigate=useNavigate();
+
+    useEffect(() => {
+      if(login){
+          navigate("/cart")
+      }
+    }, [login, navigate])
+    
     
     return (
         <div id='login-parent' /* className='active' */>
-            <div /* className='transparent' */ /* onClick={toggleLoginVisiblity} */>
+            <div /* className='transparent' */>
             </div>
             <div className='login-container'>
                 <div className='login'>

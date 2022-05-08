@@ -56,3 +56,13 @@
 .login label{
     margin: 10px 0px;
 }
+button{
+    font-size: large;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 5px;
+    border: 0px;
+    color: #ffffff;
+    background-color: rgb(63, 96, 136);
+}

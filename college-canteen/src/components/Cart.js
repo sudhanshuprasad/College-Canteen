@@ -32,13 +32,16 @@ export default function Cart() {
 
         let url = `${host}/api/cart/getCart`;
 
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Accept': '*/*',
-                'authToken': localStorage.getItem('authToken')
-            }
-        })
+        // if(true||localStorage.getItem('authToken')!==null){
+        if(localStorage.getItem('authToken')!==null){
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*',
+                    'authToken': localStorage.getItem('authToken')
+                }
+            })
             .then(response => {
                 return response.json()
             })
@@ -51,15 +54,16 @@ export default function Cart() {
             .catch(() => {
                 // console.log("some error occured while fetching GET request")
             });
+        }
             
         }, [])
         
         // console.log(cartItem)
 
-    if (!loaidng && cartItem !== undefined) {
-        return (
-            cartItem?.map((element) => (
-                <>
+        if (!loaidng && cartItem !== undefined) {
+            return (
+                cartItem?.map((element) => (
+                    <>
                     {/* {console.log(element._id)} */}
                     <CartItem
                         key={element._id}
@@ -70,8 +74,9 @@ export default function Cart() {
             ))
         )
     } else {
+        //do not use multiple return statement next time
         return (
-            <></>
+            <>login to see the cart</>
         )
     }
 

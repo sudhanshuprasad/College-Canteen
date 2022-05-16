@@ -1,41 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./css/Signup.css"
 
 const host = "http://127.0.0.1:5000";
 
-function handleSignup() {
-
-  if (document.getElementById("password").value === document.getElementById("confirm_password").value) {
-
-    const url = `${host}/api/auth/createUser/`;
-    let credentials = {
-      "email": document.getElementById('email').value,
-      "password": document.getElementById('password').value,
-      "phone": document.getElementById('phone').value,
-      "name": document.getElementById('name').value
-    }
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Accept': '*/*',
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        localStorage.setItem('authToken', data.authToken);
-      })
-  } else {
-    console.log("password did not match")
-  }
-}
 
 
 export default function Signup() {
+  
+  const [error, setError] = useState();
+
+  function handleSignup() {
+  
+    if (document.getElementById("password").value === document.getElementById("confirm_password").value) {
+  
+      const url = `${host}/api/auth/createUser/`;
+      let credentials = {
+        "email": document.getElementById('email').value,
+        "password": document.getElementById('password').value,
+        "phone": document.getElementById('phone').value,
+        "name": document.getElementById('name').value
+      }
+  
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': '*/*',
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(credentials)
+      })
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          console.log(data.error)
+          localStorage.setItem('authToken', data.authToken);
+        })
+    } else {
+      console.log("password did not match")
+    }
+  }
 
   return (
     <fieldset className='signup-details'>

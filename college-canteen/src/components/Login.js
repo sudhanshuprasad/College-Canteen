@@ -1,56 +1,59 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { BrowserRouter as Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './css/Login.css'
 
 const host = "http://127.0.0.1:5000";
 
-function handlelogin() {
-    const url = `${host}/api/auth/login`;
-    let credentials = {
-        "email": document.getElementById('User_Id').value,
-        "password": document.getElementById('password').value
-        // "email": "mymail@gmail.com",
-        // "password": "fcukyou"
-    }
-    
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Accept': '*/*',
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(credentials)
-    })
-    .then(response => {
-        // setLogin(true);
-        return response.json()
-    })
-    .then(data => {
-        if(data.error){
-            console.log(data.error)
-        }
-        localStorage.setItem('authToken', data.authToken);
-    })
-    .then(()=>{
-        console.log(localStorage.getItem('authToken'));
-    });
-    
-}
 
 export default function Login() {
     
     const [login, setLogin]=useState(false);
     const navigate=useNavigate();
 
-    useEffect(() => {
-      if(login){
-          navigate("/cart")
-      }
-    }, [login, navigate])
-    
-    
+    function handlelogin() {
+        const url = `${host}/api/auth/login`;
+        let credentials = {
+            "email": document.getElementById('User_Id').value,
+            "password": document.getElementById('password').value
+            // "email": "mymail@gmail.com",
+            // "password": "fcukyou"
+        }
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': '*/*',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(credentials)
+        })
+        .then(response => {
+            setLogin(true);
+            return response.json()
+        })
+        .then(data => {
+            if(data.error){
+                console.log(data.error);
+                window.alert(data.error);
+            }
+            localStorage.setItem('authToken', data.authToken);
+        })
+        .then(()=>{
+            console.log(localStorage.getItem('authToken'));
+            navigate("/home");
+        });
+        
+    }
+    useEffect(()=>{   
+        if(localStorage.getItem('authToken')){
+            setLogin(true);
+        }
+    },[])  
+    console.log(login);
+
+ 
     return (
         <div id='login-parent' /* className='active' */>
             <div /* className='transparent' */>

@@ -1,5 +1,5 @@
 const reducer = (state = 0, action) => {
-    if (action.type === "decrease") {
+    if (action.type === "decrease" && state>0) {
         return state - action.payload;
     }
     else if (action.type === "increase") {

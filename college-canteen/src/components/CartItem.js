@@ -66,7 +66,7 @@ export default function CartItem(props) {
 
     }
 
-    const [item, setItem] = useState([]);
+    const [item, setItem] = useState({price:0, name:"unnamed"});
 
     useEffect(() => {
         const url = `${host}/api/fooditem/getFood/${props.id}`
@@ -75,8 +75,9 @@ export default function CartItem(props) {
                 return response.json()
             })
             .then(data => {
-                // console.log(data);
-                setItem(data);
+                console.log(data);
+                if(data!==null)
+                    setItem(data);
             });
 
     }, [props])
@@ -108,5 +109,6 @@ CartItem.propTypes = {
     quantity: PropTypes.number.isRequired,
 }
 CartItem.defaultProps = {
-    quantity: 0
+    quantity: 0,
+    // item: {price:0, name:"unNamed"}
 }

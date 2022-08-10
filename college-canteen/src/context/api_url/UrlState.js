@@ -3,7 +3,7 @@ import UrlContext from './urlContext'
 
 function UrlState(props) {
   
-    const url=`https://college-cant-main-othondgwohpi.herokuapp.com`;
+    const url=`https://college-canteen-backend.herokuapp.com`;
 
     return (
     <div>

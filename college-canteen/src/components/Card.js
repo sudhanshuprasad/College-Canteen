@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from 'prop-types'
 import "./css/Card.css";
+import urlContext from "../context/api_url/urlContext";
 
-const host = "http://127.0.0.1:5000";
+// const host = "http://127.0.0.1:5000";
 
-function updateCart(foodID) {
+function updateCart(foodID, host) {
+
   console.log('food ordered ' + foodID)
   var cartItem = [];
   let quantity=1;
@@ -64,6 +66,9 @@ function updateCart(foodID) {
 
 export default function Card(props) {
 
+  const host = useContext(urlContext)
+
+
   return (
     <div className="item" id={"item" + props.num}>
       <img src={props.imgurl} alt="food" />
@@ -73,7 +78,7 @@ export default function Card(props) {
           <h3>&#8377;{props.price}</h3>
         </div>
         <h5>{props.dsc}</h5>
-        <button className="order-btn" onClick={() => updateCart(props.num)} id={"order" + props.num}>Order Now</button>
+        <button className="order-btn" onClick={() => updateCart(props.num, host)} id={"order" + props.num}>Order Now</button>
       </div>
     </div>
   );

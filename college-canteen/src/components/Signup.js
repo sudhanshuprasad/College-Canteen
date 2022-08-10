@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import urlContext from '../context/api_url/urlContext';
 import "./css/Signup.css"
 
-const host = "http://127.0.0.1:5000";
-
+// const host = "http://127.0.0.1:5000";
 
 
 export default function Signup() {
+
+  const host = useContext(urlContext)
 
   const [error, setError] = useState();
 

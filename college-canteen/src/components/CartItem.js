@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreaters } from "../state/index";
 import "./css/CartItem.css";
+import urlContext from "../context/api_url/urlContext";
 
-const host = "http://127.0.0.1:5000";
+// const host = "http://127.0.0.1:5000";
 
 export default function CartItem(props) {
+
+    const host = useContext(urlContext)
+
 
     const dispatch = useDispatch();
     const quantity = useSelector(state => state.quantity);
@@ -89,7 +93,7 @@ export default function CartItem(props) {
                 </div>
                 <div className="quantity">
                     <button onClick={decqnt}>-</button>
-                    <h2>Quantity: {props.quantity} and {quantity}</h2>
+                    <h2>Quantity: {props.quantity}</h2>
                     <button onClick={incqnt}>+</button>
                     {/* <button onClick={()=>{dispatch(actionCreaters.decqt(1, props.id))}}>-</button>
                     <h2>Quantity: {props.quantity} and {quantity}</h2>

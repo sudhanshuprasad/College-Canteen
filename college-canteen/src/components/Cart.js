@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './css/Login.css';
 import './css/Cart.css';
 import CartItem from './CartItem';
+import urlContext from '../context/api_url/urlContext';
 
-const host = "http://127.0.0.1:5000";
+// const host = "http://127.0.0.1:5000";
 
 
 export default function Cart() {
+
+    const host = useContext(urlContext)
 
     //get food items in the cart
     const [loaidng, setLoaidng] = useState(true);

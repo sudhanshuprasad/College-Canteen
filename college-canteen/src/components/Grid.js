@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import urlContext from '../context/api_url/urlContext';
 import Card from './Card'
 import "./css/Grid.css";
 
-const host="http://127.0.0.1:5000";
+// const host="http://127.0.0.1:5000";
 
 export default function Grid() {
+  
+  const host = useContext(urlContext)
   
   //get food items
   const [foodItem, setFoodItem]=useState([]);
   
   useEffect(() => {
     
+    console.log("host is "+host);
+
     let url = `${host}/api/fooditem/getFood`;
 
       fetch(url)

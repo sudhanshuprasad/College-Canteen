@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import { store } from './state/store';
+import UrlState from './context/api_url/UrlState';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-    <App />
-    </Provider>
+    <UrlState>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </UrlState>
   </React.StrictMode>,
   document.getElementById('root')
 );

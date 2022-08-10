@@ -82,14 +82,14 @@ export default function CartItem(props) {
     }, [props])
 
     return (
-        <div className="cartitem" id={"item" + item._id}>
+        <div className="cartitem" id={"item" + item?._id}>
             <div className="cartItem_image">
                 <img src="https://picsum.photos/30" alt="food" />
             </div>
             <div className="cartitem_content">
                 <div className="cartitem_name">
-                    <h3>{item.name}</h3>
-                    <h3>&#8377;{item.price}</h3>
+                    <h3>{item?.name}</h3>
+                    <h3>&#8377;{item?.price}</h3>
                 </div>
                 <div className="quantity">
                     <button onClick={decqnt}>-</button>

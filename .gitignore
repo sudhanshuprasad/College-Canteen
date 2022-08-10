@@ -1,2 +1,4 @@
 node_modules/
 college-canteen/node_modules/
+# Local Netlify folder
+.netlify

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreaters } from "../state/index";
+// import { useDispatch, useSelector } from 'react-redux';
+// import { actionCreaters } from "../state/index";
 import "./css/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
 
@@ -12,8 +12,9 @@ export default function CartItem(props) {
     const host = useContext(urlContext)
 
 
-    const dispatch = useDispatch();
-    const quantity = useSelector(state => state.quantity);
+    // const dispatch = useDispatch();
+    // const quantity = useSelector(state => state.quantity);
+    // const login = useSelector(state => state.login);
 
     //decrease quantity
     const decqnt = () => {
@@ -38,7 +39,7 @@ export default function CartItem(props) {
                 return response.json();
             })
             .then(data => {
-                console.log(data[0].items);
+                // console.log(data[0].items);
             });
 
         fetch(`${host}/api/cart/updateCart`, {
@@ -69,18 +70,18 @@ export default function CartItem(props) {
     const [item, setItem] = useState({price:0, name:"unnamed"});
 
     useEffect(() => {
-        const url = `${host}/api/fooditem/getFood/${props.id}`
+        const url = `${host}/api/fooditem/getFood/${props.id}`;
         fetch(url)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if(data!==null)
                     setItem(data);
             });
 
-    }, [props])
+    }, [props, host])
 
     return (
         <div className="cartitem" id={"item" + item?._id}>
@@ -97,8 +98,8 @@ export default function CartItem(props) {
                     <h2>Quantity: {props.quantity}</h2>
                     <button onClick={incqnt}>+</button>
                     {/* <button onClick={()=>{dispatch(actionCreaters.decqt(1, props.id))}}>-</button>
-                    <h2>Quantity: {props.quantity} and {quantity}</h2>
-                    <button onClick={()=>{dispatch(actionCreaters.incqt(1))}}>+</button> */}
+                    <h2>Quantity: {quantity} login: {login?"loggedin":"not loggedin"}</h2>
+                    <button onClick={()=>{dispatch(actionCreaters.setLogin(!login))}}>+</button> */}
                 </div>
             </div>
         </div>

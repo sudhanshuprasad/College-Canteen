@@ -26,7 +26,7 @@ export default function Grid() {
         setFoodItem(data);
       });
     // console.log(foodItem)
-  },[])
+  },[host])
   
   
   return (

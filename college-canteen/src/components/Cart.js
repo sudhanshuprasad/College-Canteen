@@ -9,7 +9,7 @@ import urlContext from '../context/api_url/urlContext';
 
 export default function Cart() {
 
-    const host = useContext(urlContext)
+    const host = useContext(urlContext);
 
     //get food items in the cart
     const [loaidng, setLoaidng] = useState(true);
@@ -22,7 +22,7 @@ export default function Cart() {
         let url = `${host}/api/cart/getCart`;
 
         // if(true||localStorage.getItem('authToken')!==null){
-        if(localStorage.getItem('authToken')!==null){
+        if (localStorage.getItem('authToken') !== null) {
 
             fetch(url, {
                 method: 'GET',
@@ -31,36 +31,41 @@ export default function Cart() {
                     'authToken': localStorage.getItem('authToken')
                 }
             })
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                // console.log("after fetch ");
-                console.log(data[0].items);
-                setCartItem(data[0].items);
-                setLoaidng(false);
-            })
-            .catch(() => {
-                // console.log("some error occured while fetching GET request")
-            });
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    // console.log("after fetch ");
+                    // console.log(data[0].items);
+                    setCartItem(data[0].items);
+                    setLoaidng(false);
+                })
+                .catch(() => {
+                    // console.log("some error occured while fetching GET request")
+                });
         }
-            
-        }, [])
-        
-        // console.log(cartItem)
 
-        if (!loaidng && cartItem !== undefined) {
-            return (
-                cartItem?.map((element) => (
-                    <>
+    }, [host])
+
+    console.log(cartItem)
+
+    if (!loaidng && cartItem !== undefined) {
+        return (<>
+
+            {cartItem?.map((element) => (
+                <>
                     {/* {console.log(element._id)} */}
                     <CartItem
                         key={element._id}
                         id={element._id}
                         quantity={element.quantity}
+                        update
                     />
                 </>
-            ))
+            ))}
+
+            <button>Checkout...</button>
+            </>
         )
     } else {
         //do not use multiple return statement next time

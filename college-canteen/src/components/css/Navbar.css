@@ -41,7 +41,7 @@
     background-color: white;
     border-radius: 10px;
 }
-
+ 
 #search-bar {
     /* padding: 9px; */
     padding-bottom: 4px;
@@ -125,4 +125,18 @@
 
 .no-scroll {
     overflow: hidden;
+}
+
+
+/* removing search bar */ 
+@media screen and (max-width:600px) {
+      #search-bar{
+        display: none;
+      }
+      #search-area{
+        background-color:rgb(66, 66, 66) ;
+      }
+      #search-icon{
+       filter: invert(100%);
+    }
 }

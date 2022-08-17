@@ -2,7 +2,7 @@ import "./css/Navbar.css";
 import React, { useEffect } from 'react';
 // import { useEffect, useNavigate} from 'react-router-dom';
 // import Login from './Login';
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreaters } from "../state/index";
@@ -50,6 +50,7 @@ export default function Navbar() {
                             }}><Link to="/login"><p id='login'>Login</p></Link></li>
                             : <li onClick={handleLogout}><p id='login'>Logout</p></li>}
                         <li><Link to="/cart"><img src="https://img.icons8.com/ios-glyphs/30/000000/shopping-cart--v1.png" alt="cart" id="cart" /></Link></li>
+                        <li>10</li>
                     </ul>
                 </div>
             </div>

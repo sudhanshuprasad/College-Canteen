@@ -6,6 +6,7 @@ import Signup from './components/Signup';
 import Cart from './components/Cart';
 import Login from './components/Login';
 import Root from './components/Root';
+import Product from './components/Product';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/home" element={<Grid/>} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/product/:id" element={<Product/>} />
         </Routes>
       </BrowserRouter>
     </>

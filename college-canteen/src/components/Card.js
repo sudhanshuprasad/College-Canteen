@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from 'prop-types'
 import "./css/Card.css";
 import urlContext from "../context/api_url/urlContext";
+import { Link } from "react-router-dom";
 
 // const host = "http://127.0.0.1:5000";
 
@@ -83,21 +84,25 @@ export default function Card(props) {
       },
       body: `{"_id":"${foodID}", "quantity":1}`
     })
-      .then(response=>response.json())
-      .then((data)=>{
+      .then(response => response.json())
+      .then((data) => {
         console.log(data);
       })
   }
 
   return (
     <div className="item" id={"item" + props.num}>
-      <img src={props.imgurl} alt="food" />
+      <Link to={`/product/${props.num}`}>
+        <img src={props.imgurl} alt="food" />
+      </Link>
       <div className="content">
-        <div className="item_name">
-          <h3>{props.foodName}</h3>
-          <h3>&#8377;{props.price}</h3>
-        </div>
-        <h5>{props.dsc}</h5>
+        {/* <Link to={`/product/${props.num}`}> */}
+          <div className="item_name">
+            <h3>{props.foodName}</h3>
+            <h3>&#8377;{props.price}</h3>
+          </div>
+          <h5>{props.dsc}</h5>
+        {/* </Link> */}
         {/* <button className="order-btn" onClick={() => updateCart(props.num, host)} id={"order" + props.num}>Order Now</button> */}
         <button className="order-btn" onClick={() => insertCart(props.num)} id={"order" + props.num}>Order Now</button>
       </div>

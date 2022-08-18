@@ -5,7 +5,7 @@ window.env = {
   "CAMLIBS": "C:\\Program Files\\darktable\\lib\\libgphoto2\\2.5.27",
   "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
   "ChocolateyLastPathUpdate": "132546754669835484",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_5404_FNBSBHNSIJVESEME",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_4512_VOEBAYLCKNADASSW",
   "COLOR": "1",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",

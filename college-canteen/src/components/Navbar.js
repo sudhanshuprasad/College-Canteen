@@ -12,6 +12,7 @@ export default function Navbar() {
 
     const dispatch = useDispatch();
     const login = useSelector(state => state.login);
+    const theme = useSelector(state => state.theme);
 
     // const [login, SetLogin] = useState([Boolean(localStorage.getItem('authToken'))]);
     // let navigate=useNavigate();
@@ -23,12 +24,7 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        if (Boolean(localStorage.getItem('authToken'))) {
-            // SetLogin(true);
-        }
-        else {
-            // SetLogin(false);
-        }
+        localStorage.getItem('authToken') && dispatch(actionCreaters.setLogin(true));
     }, [])
 
     return (
@@ -44,10 +40,13 @@ export default function Navbar() {
                         <li><img src='https://img.icons8.com/ios-filled/25/000000/search--v1.png' alt='search' id="search-icon" /></li>
                     </ul>
                     <ul className='nav-ul' id="right">
+                        <li onClick={() => {
+                            dispatch(actionCreaters.setThemeDark(!theme));
+                        }}>Theme</li>
                         {!login ? <li onClick={() => {
-                                // SetLogin(true);
-                                // dispatch(actionCreaters.setLogin(!login))
-                            }}><Link to="/login"><p id='login'>Login</p></Link></li>
+                            // SetLogin(true);
+                            // dispatch(actionCreaters.setLogin(!login))
+                        }}><Link to="/login"><p id='login'>Login</p></Link></li>
                             : <li onClick={handleLogout}><p id='login'>Logout</p></li>}
                         <li><Link to="/cart"><img src="https://img.icons8.com/ios-glyphs/30/000000/shopping-cart--v1.png" alt="cart" id="cart" /></Link></li>
                         <li>10</li>

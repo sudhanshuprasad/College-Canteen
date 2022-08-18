@@ -34,3 +34,12 @@ export const setLogin = (login) =>{
         })
     }
 }
+
+export const setThemeDark = (theme) =>{
+    return (dispatch) => {
+        dispatch({
+            type: "set-Theme-Dark",
+            payload: theme,
+        })
+    }
+}

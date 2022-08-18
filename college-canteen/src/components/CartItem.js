@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 // import { actionCreaters } from "../state/index";
 import "./css/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
+import { useNavigate } from "react-router-dom";
 
 // const host = "http://127.0.0.1:5000";
 
 export default function CartItem(props) {
 
     const host = useContext(urlContext)
+    const navigate = useNavigate();
 
 
     // const dispatch = useDispatch();
@@ -84,7 +86,7 @@ export default function CartItem(props) {
     }, [props, host])
 
     return (
-        <div className="cartitem" id={"item" + item?._id}>
+        <div className="cartitem" id={"item" + item?._id} onClick={()=>{navigate(`/product/${item._id}`)}}>
             <div className="cartItem_image">
                 <img src="https://picsum.photos/30" alt="food" />
             </div>

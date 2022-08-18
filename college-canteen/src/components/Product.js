@@ -40,7 +40,7 @@ function Product(props) {
     }, [params.id, host]);
 
 
-    console.log(params.id);
+    // console.log(params.id);
 
     return (
         <div className='product-container' style={{

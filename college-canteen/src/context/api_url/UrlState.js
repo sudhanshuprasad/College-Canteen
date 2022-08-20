@@ -1,10 +1,11 @@
 import React from 'react'
 import UrlContext from './urlContext'
+// import env from "react-dotenv";
 
 function UrlState(props) {
   
-    const url=`https://college-canteen-backend.herokuapp.com`;
-
+    const url=process.env.REACT_APP_BACKEND_URL||`https://college-canteen-backend.herokuapp.com`;
+    // console.log(process.env.REACT_APP_BACKEND_URL)
     return (
     <div>
       <UrlContext.Provider value={url}>

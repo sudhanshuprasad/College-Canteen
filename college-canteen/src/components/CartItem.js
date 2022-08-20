@@ -4,101 +4,117 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreaters } from "../state/index";
 import "./css/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
+import { useNavigate } from "react-router-dom";
 
 // const host = "http://127.0.0.1:5000";
+
+let cart = [{
+    _id: "props.id",
+    quantity: "quantity",
+    user_id: "localStorage.getItem('user_id')",
+},{
+    _id: "props.id+1", 
+    quantity: "quantity",
+    user_id: "localStorage.getItem('user_id')",
+},
+{
+    _id: "props.id+2",
+    quantity: "quantity",
+    user_id: "localStorage.getItem('user_id')",
+
+}];
 
 export default function CartItem(props) {
 
     const host = useContext(urlContext)
+    const navigate = useNavigate();
 
 
     const dispatch = useDispatch();
-    const quantity = useSelector(state => state.quantity);
+    const [quantity, setQuantity] = useState(props.quantity);
+    let cartArray = useSelector(state => state.cart);
+
+
 
     //decrease quantity
     const decqnt = () => {
         console.log("decrease quantity")
+        if (quantity > 1) {
+            
+            const url = `${host}/api/cart/insertCart`;
+            fetch(url,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "authToken": localStorage.getItem('authToken')
+                },
+                body: JSON.stringify({
+                    _id: props.id,
+                    quantity: quantity-1,
+                })
+            })
+
+            setQuantity(quantity - 1);
+        }
     }
 
 
     //increase quantity
     const incqnt = () => {
-        console.log("increase quantity")
-
-        //to get the cart and modify it
-        fetch(`${host}/api/cart/getCart`, {
-            method: 'GET',
-            headers: {
-                'Accept': '*/*',
-                "Content-Type": "application/json",
-                'authToken': localStorage.getItem('authToken')
-            }
+        console.log({
+            _id: props.id,
+            quantity: quantity+1,
         })
-            .then(response => {
-                return response.json();
+        
+        const url = `${host}/api/cart/insertCart`;
+            fetch(url,{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "authToken": localStorage.getItem('authToken')
+                },
+                body: JSON.stringify({
+                    "_id": props.id,
+                    "quantity": quantity+1,
+                })
             })
-            .then(data => {
-                console.log(data[0].items);
-            });
-
-        fetch(`${host}/api/cart/updateCart`, {
-            method: 'PUT',
-            headers: {
-                'Accept': '*/*',
-                "Content-Type": "application/json",
-                'authToken': localStorage.getItem('authToken')
-            }
-        })
-            .then(() => {
-                //to update the cart according to the order
-                const url = `${host}/api/cart/updateCart`
-
-                fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Accept': '*/*',
-                        "Content-Type": "application/json",
-                        'authToken': localStorage.getItem('authToken')
-                    },
-                    // body: `{"items":${JSON.stringify(cartItem)}}`
-                });
-            })
-
+            setQuantity(quantity + 1);
+        // dispatch(actionCreaters.setCart(cart))
     }
 
     const [item, setItem] = useState({price:0, name:"unnamed"});
 
     useEffect(() => {
-        const url = `${host}/api/fooditem/getFood/${props.id}`
+        const url = `${host}/api/fooditem/getFood/${props.id}`;
         fetch(url)
             .then(response => {
                 return response.json()
             })
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if(data!==null)
                     setItem(data);
             });
 
-    }, [props])
+    }, [props, host])
 
     return (
         <div className="cartitem" id={"item" + item?._id}>
-            <div className="cartItem_image">
+            <div className="cartItem_image" onClick={()=>{navigate(`/product/${item._id}`)}}>
                 <img src="https://picsum.photos/30" alt="food" />
             </div>
             <div className="cartitem_content">
-                <div className="cartitem_name">
+                <div className="cartitem_name" onClick={()=>{navigate(`/product/${item._id}`)}}>
                     <h3>{item?.name}</h3>
                     <h3>&#8377;{item?.price}</h3>
                 </div>
                 <div className="quantity">
                     <button onClick={decqnt}>-</button>
-                    <h2>Quantity: {props.quantity}</h2>
+                    <h2>Quantity: {quantity}</h2>
                     <button onClick={incqnt}>+</button>
                     {/* <button onClick={()=>{dispatch(actionCreaters.decqt(1, props.id))}}>-</button>
-                    <h2>Quantity: {props.quantity} and {quantity}</h2>
-                    <button onClick={()=>{dispatch(actionCreaters.incqt(1))}}>+</button> */}
+                    <h2>Quantity: {quantity} {console.log("array is "+cartArray[0]?._id)}</h2>
+                    <button onClick={()=>{dispatch(actionCreaters.setCart(cart))}}>+</button> */}
                 </div>
             </div>
         </div>

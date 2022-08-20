@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useEffect } from 'react';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
+import { actionCreaters } from "../state/index";
 import './css/Login.css'
 
 // const host = "http://127.0.0.1:5000";
@@ -10,8 +11,8 @@ import './css/Login.css'
 export default function Login() {
 
     const host = useContext(urlContext)
-
-    const [login, setLogin] = useState(false);
+    const dispatch = useDispatch();
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     function handlelogin() {
@@ -32,28 +33,30 @@ export default function Login() {
             body: JSON.stringify(credentials)
         })
             .then(response => {
-                setLogin(true);
                 return response.json()
             })
             .then(data => {
                 if (data.error) {
                     console.log(data.error);
-                    window.alert(data.error);
+                    setError(data.error);
+                    dispatch(actionCreaters.setLogin(false))
+                }else{
+                    dispatch(actionCreaters.setLogin(true))
+                    localStorage.setItem('authToken', data.authToken);
+                    navigate("/home");
+
                 }
-                localStorage.setItem('authToken', data.authToken);
             })
             .then(() => {
                 console.log(localStorage.getItem('authToken'));
-                navigate("/home");
             });
 
     }
     useEffect(() => {
         if (localStorage.getItem('authToken')) {
-            setLogin(true);
+            // setLogin(true);
         }
     }, [])
-    console.log(login);
 
 
     return (
@@ -74,6 +77,7 @@ export default function Login() {
                         <button onClick={handlelogin}>Login</button>
                         <br />
                     </div>
+                        <sapn className="error">{error}</sapn>
                     <div>
                         <p>New User?</p>
                         <Link to="/signup" >Sign Up</Link>

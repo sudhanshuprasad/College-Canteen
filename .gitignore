@@ -2,5 +2,6 @@ node_modules/
 college-canteen/node_modules/
 # Local Netlify folder
 .netlify
-
+.vscode
+college-canteen/.env
 .env

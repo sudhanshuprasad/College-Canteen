@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import "./css/Signup.css"
 
@@ -7,8 +8,8 @@ import "./css/Signup.css"
 
 export default function Signup() {
 
-  const host = useContext(urlContext)
-
+  const host = useContext(urlContext);
+  const navigate = useNavigate();
   const [error, setError] = useState();
 
   function handleSignup() {
@@ -36,15 +37,20 @@ export default function Signup() {
         })
         .then(data => {
 
-          if (data.error[0].msg !== undefined) {
+          if (data.error && data.error[0]?.msg !== undefined) {
             // console.log(data.error[0].msg);
-            setError(data.error[0].msg);
+            setError(data.error[0]?.msg);
           } else if (data.error) {
             // console.log(data.error);
             setError(data.error);
           }
-
-          localStorage.setItem('authToken', data.authToken);
+          
+          console.log(data.authToken)
+          if(data.authToken!=null){
+            console.log(data);
+            navigate("/home");
+            localStorage.setItem('authToken', data.authToken);
+          }
         })
     } else {
       console.log("Password did not match")

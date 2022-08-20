@@ -1,31 +1,31 @@
 import "./css/Navbar.css";
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 // import { useEffect, useNavigate} from 'react-router-dom';
-import Login, { toggleLoginVisiblity } from './Login';
-import Cart, { /* toggleCartVisiblity */ } from './Cart';
-import { useState } from "react";
+// import Login from './Login';
+// import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreaters } from "../state/index";
 
-// console.log(Boolean(localStorage.getItem('authToken')))
-// console.log(localStorage.getItem('authToken'))
 
 export default function Navbar() {
-    const [login, SetLogin]= useState([Boolean(localStorage.getItem('authToken'))]);
+
+    const dispatch = useDispatch();
+    const login = useSelector(state => state.login);
+    const theme = useSelector(state => state.theme);
+
+    // const [login, SetLogin] = useState([Boolean(localStorage.getItem('authToken'))]);
     // let navigate=useNavigate();
-    const handleLogout=()=>{
-        SetLogin(false)
+    const handleLogout = () => {
+        // SetLogin(false)
+        dispatch(actionCreaters.setLogin(false))
         localStorage.removeItem("authToken");
         // navigate('/');
     }
-    
-    useEffect(()=>{
-        if(Boolean(localStorage.getItem('authToken'))){
-            SetLogin(true);
-        }
-        else{
-            SetLogin(false);
-        }
-    },[])
+
+    useEffect(() => {
+        localStorage.getItem('authToken') && dispatch(actionCreaters.setLogin(true));
+    }, [])
 
     return (
         <>
@@ -40,11 +40,16 @@ export default function Navbar() {
                         <li><img src='https://img.icons8.com/ios-filled/25/000000/search--v1.png' alt='search' id="search-icon" /></li>
                     </ul>
                     <ul className='nav-ul' id="right">
-                        {!login?<li onClick={()=>{
-                            SetLogin(true)
+                        <li onClick={() => {
+                            dispatch(actionCreaters.setThemeDark(!theme));
+                        }}>Theme</li>
+                        {!login ? <li onClick={() => {
+                            // SetLogin(true);
+                            // dispatch(actionCreaters.setLogin(!login))
                         }}><Link to="/login"><p id='login'>Login</p></Link></li>
-                        :<li onClick={handleLogout}><p id='login'>Logout</p></li>}
+                            : <li onClick={handleLogout}><p id='login'>Logout</p></li>}
                         <li><Link to="/cart"><img src="https://img.icons8.com/ios-glyphs/30/000000/shopping-cart--v1.png" alt="cart" id="cart" /></Link></li>
+                        <li>10</li>
                     </ul>
                 </div>
             </div>

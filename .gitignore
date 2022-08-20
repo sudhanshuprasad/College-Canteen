@@ -4,3 +4,4 @@ college-canteen/node_modules/
 .netlify
 .vscode
 college-canteen/.env
+.env

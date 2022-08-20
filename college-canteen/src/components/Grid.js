@@ -11,6 +11,7 @@ export default function Grid() {
   const host = useContext(urlContext);
   const theme = useSelector(state => state.theme);
 
+  const [loading, setLoading] = useState(true);
 
   //get food items
   const [foodItem, setFoodItem] = useState([]);
@@ -27,6 +28,7 @@ export default function Grid() {
       })
       .then(data => {
         setFoodItem(data);
+        setLoading(false);
       });
     // console.log(foodItem)
   }, [host])
@@ -49,6 +51,7 @@ export default function Grid() {
           />
         ))
       }
+      {loading ? <div>Loading...</div> : null}
     </div>
   )
 }

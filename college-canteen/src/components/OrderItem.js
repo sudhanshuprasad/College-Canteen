@@ -1,20 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { actionCreaters } from "../state/index";
 import "./css/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
 
-// const host = "http://127.0.0.1:5000";
 
 export default function OrderItem(props) {
 
     const host = useContext(urlContext)
-
-
-    // const dispatch = useDispatch();
-    // const quantity = useSelector(state => state.quantity);
-    // const login = useSelector(state => state.login);
 
 
     const [item, setItem] = useState({price:0, name:"unnamed"});
@@ -56,5 +48,4 @@ OrderItem.propTypes = {
 }
 OrderItem.defaultProps = {
     quantity: 0,
-    // item: {price:0, name:"unNamed"}
 }

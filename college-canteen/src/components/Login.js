@@ -66,7 +66,7 @@ export default function Login() {
             <div className='login-container'>
                 <div className='login'>
                     <div>
-                        <label htmlFor='User_ID'>Enter ID:</label><br />
+                        <label htmlFor='User_ID'>Enter Email ID:</label><br />
                         <input type="text" name='User_ID' id='User_Id' placeholder='User ID'></input><br />
                     </div>
                     <div>

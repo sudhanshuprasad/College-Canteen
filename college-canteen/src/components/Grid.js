@@ -18,7 +18,7 @@ export default function Grid() {
 
   useEffect(() => {
 
-    console.log("host is " + host);
+    console.log("backend api is " + host);
 
     let url = `${host}/api/fooditem/getFood`;
 

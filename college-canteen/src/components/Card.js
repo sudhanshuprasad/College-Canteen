@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // function updateCart(foodID, host) {
 
 //   console.log('food ordered ' + foodID)
-//   var cartItem = [];
+//   let cartItem = [];
 //   let quantity = 1;
 
 //   //to get the cart and modify it
@@ -66,9 +66,24 @@ import { Link } from "react-router-dom";
 // }
 
 
-export default function Card(props) {
 
+export default function Card(props) {
+  
   const host = useContext(urlContext)
+  
+  function addToCart(foodID) {
+    const url = `${host}/api/cart/updateCart`
+
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Accept': '*/*',
+          "Content-Type": "application/json",
+          'authToken': localStorage.getItem('authToken')
+        },
+        body: `{"items":${JSON.stringify({_id: foodID, quantity: 1})}}`
+      });
+  }
 
   //function to add an item to the cart by sending the item only
   function insertCart(foodID) {

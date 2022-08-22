@@ -55,7 +55,7 @@ export default function Cart() {
 
     }, [host])
 
-    console.log(cartItem)
+    // console.log(cartItem)
 
     const handleCheckout = () => {
         let url = `${host}/api/cart/checkout`;
@@ -69,7 +69,7 @@ export default function Cart() {
 
             {cartItem?.map((element) => (
                 <>
-                    {/* {console.log(element._id)} */}
+                    {/* console.log(element._id) */}
                     <CartItem
                         key={element._id}
                         id={element._id}
@@ -78,7 +78,7 @@ export default function Cart() {
                     />
                 </>
             ))}
-            {console.log(arr)}{arr[0]?._id}
+            {/* {console.log(arr)}{arr[0]?._id} */}
             <button onClick={handleCheckout}>Checkout...</button>
             <button>Delete All</button>
             </>

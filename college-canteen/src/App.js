@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(localStorage.getItem('darkTheme'))
+    // console.log(localStorage.getItem('darkTheme'))
     const defaultTheme = () => {
       dispatch(actionCreaters.setThemeDark(!Boolean(localStorage.getItem('darkTheme'))));
     }

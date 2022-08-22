@@ -119,7 +119,7 @@ export default function Card(props) {
           <h5>{props.dsc}</h5>
         {/* </Link> */}
         {/* <button className="order-btn" onClick={() => updateCart(props.num, host)} id={"order" + props.num}>Order Now</button> */}
-        <button className="order-btn" onClick={() => insertCart(props.num)} id={"order" + props.num}>Order Now</button>
+        <button className="order-btn" onClick={() => addToCart(props.num)} id={"order" + props.num}>Order Now</button>
       </div>
     </div>
   );

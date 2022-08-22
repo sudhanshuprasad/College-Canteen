@@ -8,21 +8,21 @@ import { useNavigate } from "react-router-dom";
 
 // const host = "http://127.0.0.1:5000";
 
-let cart = [{
-    _id: "props.id",
-    quantity: "quantity",
-    user_id: "localStorage.getItem('user_id')",
-},{
-    _id: "props.id+1", 
-    quantity: "quantity",
-    user_id: "localStorage.getItem('user_id')",
-},
-{
-    _id: "props.id+2",
-    quantity: "quantity",
-    user_id: "localStorage.getItem('user_id')",
+// let cart = [{
+//     _id: "props.id",
+//     quantity: "quantity",
+//     user_id: "localStorage.getItem('user_id')",
+// },{
+//     _id: "props.id+1", 
+//     quantity: "quantity",
+//     user_id: "localStorage.getItem('user_id')",
+// },
+// {
+//     _id: "props.id+2",
+//     quantity: "quantity",
+//     user_id: "localStorage.getItem('user_id')",
 
-}];
+// }];
 
 export default function CartItem(props) {
 
@@ -38,7 +38,7 @@ export default function CartItem(props) {
 
     //decrease quantity
     const decqnt = () => {
-        console.log("decrease quantity")
+        // console.log("decrease quantity")
         if (quantity > 1) {
             
             const url = `${host}/api/cart/insertCart`;

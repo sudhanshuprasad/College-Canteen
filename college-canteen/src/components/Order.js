@@ -19,7 +19,7 @@ export default function Order() {
 
     useEffect(() => {
 
-        let url = `${host}/api/cart/getCart`;
+        let url = `${host}/api/order/getOrder`;
 
         // if(true||localStorage.getItem('authToken')!==null){
         if (localStorage.getItem('authToken') !== null) {
@@ -35,8 +35,7 @@ export default function Order() {
                     return response.json()
                 })
                 .then(data => {
-                    // console.log("after fetch ");
-                    // console.log(data[0].items);
+                    console.log(data);
                     setCartItem(data[0].items);
                     setLoaidng(false);
                 })

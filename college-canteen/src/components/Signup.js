@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import "./css/Signup.css"
+import { actionCreaters } from '../state/index';
 
 // const host = "http://127.0.0.1:5000";
 
@@ -11,6 +13,7 @@ export default function Signup() {
   const host = useContext(urlContext);
   const navigate = useNavigate();
   const [error, setError] = useState();
+  const dispatch = useDispatch();
 
   function handleSignup() {
 
@@ -44,10 +47,11 @@ export default function Signup() {
             // console.log(data.error);
             setError(data.error);
           }
-          
+
           console.log(data.authToken)
-          if(data.authToken!=null){
+          if (data.authToken != null) {
             console.log(data);
+            dispatch(actionCreaters.setLogin(true))
             navigate("/home");
             localStorage.setItem('authToken', data.authToken);
           }

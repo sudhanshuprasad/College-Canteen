@@ -122,7 +122,7 @@ export default function CartItem(props) {
                     {/* <button onClick={()=>{dispatch(actionCreaters.decqt(1, props.id))}}>-</button>
                     <h2>Quantity: {quantity} {console.log("array is "+cartArray[0]?._id)}</h2>
                     <button onClick={()=>{dispatch(actionCreaters.setCart(cart))}}>+</button> */}
-                    <ModifyCart _id={props.id}></ModifyCart>
+                    {/* <ModifyCart _id={props.id}></ModifyCart> */}
                 </div>
             </div>
         </div>

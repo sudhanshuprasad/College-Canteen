@@ -10,14 +10,20 @@ import Root from './components/Root';
 import Product from './components/Product';
 import { useDispatch } from 'react-redux';
 import { actionCreaters } from "./state/index";
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import NotFound from './components/NotFound';
+import Profile from './components/Profile';
+import urlContext from './context/api_url/urlContext';
 
 function App() {
 
   const dispatch = useDispatch();
+  const host = useContext(urlContext);
+
 
   useEffect(() => {
     // console.log(localStorage.getItem('darkTheme'))
+    console.log("backend api is " + host);
     const defaultTheme = () => {
       dispatch(actionCreaters.setThemeDark(!Boolean(localStorage.getItem('darkTheme'))));
     }
@@ -45,7 +51,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile/:user" element={<Profile />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>

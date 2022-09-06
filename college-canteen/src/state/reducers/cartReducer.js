@@ -1,4 +1,4 @@
-const reducer=(state={}, action)=>{
+const reducer=(state=[], action)=>{
     // console.log("from cartReducer cart "+state);
     // console.log(action);
     if(action.type==="setCart"&&action.payload!==undefined){

@@ -43,7 +43,7 @@ export default function Cart() {
                 })
                 .then(data => {
                     // console.log("after fetch ");
-                    // console.log(data[0].items);
+                    console.log(data[0].items);
                     setCartItem(data[0].items);
                     dispatch(actionCreaters.setCart(data[0].items));
                     setLoaidng(false);
@@ -58,36 +58,62 @@ export default function Cart() {
     // console.log(cartItem)
 
     const handleCheckout = () => {
-        let url = `${host}/api/cart/checkout`;
+        let url = `${host}/api/order/checkout`;
+        fetch(url,{
+            method:'POST',
+            headers:{
+                'Accept': '*/*',
+                'authToken': localStorage.getItem('authToken')
+            }
+        })
 
         navigate("/order")
     }
 
-    if (!loaidng && cartItem !== undefined) {
-        return (<>
-        
-
-            {cartItem?.map((element) => (
-                <>
-                    {/* console.log(element._id) */}
-                    <CartItem
-                        key={element._id}
-                        id={element._id}
-                        quantity={element.quantity}
-                        update
-                    />
-                </>
-            ))}
-            {/* {console.log(arr)}{arr[0]?._id} */}
-            <button onClick={handleCheckout}>Checkout...</button>
-            <button>Delete All</button>
-            </>
-        )
-    } else {
-        //do not use multiple return statement next time
-        return (
-            <>login to see the cart</>
-        )
+    const handleDelete = () => {
+        let url = `${host}/api/cart/updateCart`;
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                "authToken": localStorage.getItem('authToken')
+            },
+            body: `{"items": []}`
+        })
+            .then(response => response.json())
+            .then((data) => {
+                data.success !== null && setCartItem([]);
+                console.log(data.success)
+            })
     }
+
+    // if (!loaidng && cartItem !== undefined) {
+    return (<>
+
+        {loaidng ? <div>loading</div> : null}
+
+        {cartItem?.map((element) => (
+            <>
+                {/* console.log(element._id) */}
+                <CartItem
+                    key={element._id}
+                    id={element._id}
+                    quantity={element.quantity}
+                    update
+                />
+            </>
+        ))}
+        {/* {console.log(arr)}{arr[0]?._id} */}
+        <button onClick={handleCheckout}>Checkout...</button>
+        <button onClick={handleDelete}>Delete All</button>
+    </>
+    )
+    // } else {
+    //     //do not use multiple return statement next time
+    //     return (
+    //         <>login to see the cart</>
+    //     )
+    // }
 
 }

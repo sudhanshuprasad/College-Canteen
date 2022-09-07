@@ -15,6 +15,7 @@ export default function Cart() {
     const host = useContext(urlContext);
     const navigate = useNavigate();
     let arr = useSelector(state => state.cart);
+    const cartSize = useSelector(state => state.cartSize);
     const dispatch = useDispatch();
 
 
@@ -42,10 +43,16 @@ export default function Cart() {
                     return response.json()
                 })
                 .then(data => {
-                    // console.log("after fetch ");
                     console.log(data[0].items);
                     setCartItem(data[0].items);
                     dispatch(actionCreaters.setCart(data[0].items));
+
+                    let cartSize=0
+                    data[0].items.map((element)=>{
+                        cartSize+=element.quantity;
+                    })
+
+                    dispatch(actionCreaters.setCartSize(cartSize));
                     setLoaidng(false);
                 })
                 .catch(() => {
@@ -106,6 +113,7 @@ export default function Cart() {
         ))}
         {/* {console.log(arr)}{arr[0]?._id} */}
         <button onClick={handleCheckout}>Checkout...</button>
+        {cartSize}
         <button onClick={handleDelete}>Delete All</button>
     </>
     )

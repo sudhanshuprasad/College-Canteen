@@ -13,6 +13,7 @@ export default function Grid() {
 
   const host = useContext(urlContext);
   const theme = useSelector(state => state.theme);
+  const login = useSelector(state => state.login);
   const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(true);
@@ -36,18 +37,22 @@ export default function Grid() {
 
     //set localcart
 
-    fetch(`${host}/api/cart/getCart`, {
-      method: 'GET',
-      headers: {
-        'Accept': '*/*',
-        'authToken': localStorage.getItem('authToken')
-      }
-    })
-      .then((response) => response.json())
-      .then(data => {
-        dispatch(actionCreaters.setCart(data[0].items))
-        console.log(data[0].items);
+    if (login) {
+
+      fetch(`${host}/api/cart/getCart`, {
+        method: 'GET',
+        headers: {
+          'Accept': '*/*',
+          'authToken': localStorage.getItem('authToken')
+        }
       })
+        .then((response) => response.json())
+        .then(data => {
+          dispatch(actionCreaters.setCart(data[0].items))
+          console.log(data[0].items);
+        })
+
+    }
 
   }, [host])
 

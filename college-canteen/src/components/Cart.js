@@ -113,7 +113,6 @@ export default function Cart() {
         ))}
         {/* {console.log(arr)}{arr[0]?._id} */}
         <button onClick={handleCheckout}>Checkout...</button>
-        {cartSize}
         <button onClick={handleDelete}>Delete All</button>
     </>
     )

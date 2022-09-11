@@ -27,6 +27,8 @@ export default function Cart() {
 
     useEffect(() => {
 
+        //remove this redundent fetch request
+
         let url = `${host}/api/cart/getCart`;
 
         // if(true||localStorage.getItem('authToken')!==null){
@@ -56,7 +58,7 @@ export default function Cart() {
                     setLoaidng(false);
                 })
                 .catch(() => {
-                    // console.log("some error occured while fetching GET request")
+                    console.log("some error occured while fetching GET request")
                 });
         }
 

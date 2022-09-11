@@ -1,16 +1,18 @@
 import "./css/Navbar.css";
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import { useEffect, useNavigate} from 'react-router-dom';
 // import Login from './Login';
 // import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreaters } from "../state/index";
+import urlContext from "../context/api_url/urlContext";
 
 
 export default function Navbar() {
 
     const dispatch = useDispatch();
+    const host = useContext(urlContext);
     const login = useSelector(state => state.login);
     const theme = useSelector(state => state.theme);
     const cartSize = useSelector(state => state.cartSize);
@@ -26,6 +28,38 @@ export default function Navbar() {
 
     useEffect(() => {
         localStorage.getItem('authToken') && dispatch(actionCreaters.setLogin(true));
+
+        let url = `${host}/api/cart/getCart`;
+
+        // if(true||localStorage.getItem('authToken')!==null){
+        if (localStorage.getItem('authToken') !== null) {
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*',
+                    'authToken': localStorage.getItem('authToken')
+                }
+            })
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    console.log(data[0].items);
+                    // dispatch(actionCreaters.setCart(data[0].items));
+
+                    let cartSize=0
+                    data[0].items.map((element)=>{
+                        cartSize+=element.quantity;
+                    })
+
+                    dispatch(actionCreaters.setCartSize(cartSize));
+                })
+                .catch(() => {
+                    console.log("some error occured while fetching GET request")
+                });
+        }
+
     }, [])
 
     return (

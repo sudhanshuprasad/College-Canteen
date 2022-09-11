@@ -29,7 +29,8 @@ export default function CartItem(props) {
 
     const host = useContext(urlContext)
     const navigate = useNavigate();
-
+    const controller = new AbortController()
+    let cartSize = useSelector(state => state.cartSize);
 
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(props.quantity);
@@ -56,6 +57,7 @@ export default function CartItem(props) {
             })
 
             setQuantity(quantity - 1);
+            dispatch(actionCreaters.setCartSize(cartSize-1));
         }
     }
 
@@ -81,7 +83,9 @@ export default function CartItem(props) {
         })
 
         setQuantity(quantity + 1);
-        // dispatch(actionCreaters.setCart(cart))
+        // dispatch(actionCreaters.setCartSize(cart))
+        dispatch(actionCreaters.setCartSize(cartSize+1));
+
     }
 
     const [item, setItem] = useState({ price: 0, name: "unnamed" });
@@ -102,6 +106,10 @@ export default function CartItem(props) {
     }, [props.id, host])
 
     useEffect(() => {
+
+        return(()=>{
+            controller.abort();
+        })
 
     }, [props, host])
 

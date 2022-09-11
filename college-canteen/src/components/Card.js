@@ -75,7 +75,7 @@ export default function Card(props) {
   const dispatch = useDispatch();
   const localCart = useSelector(state => state.cart);
 
-  let cartItem = [{ _id: "62278be34e90e53ae1b763be", quantity: 2 }, { _id: "62278ce84e90e53ae1b763c0", quantity: 3 },];
+  // let cartItem = [{ _id: "62278be34e90e53ae1b763be", quantity: 2 }, { _id: "62278ce84e90e53ae1b763c0", quantity: 3 },];
 
   useEffect(() => {
     // dispatch(actionCreaters.setCart(cartItem))
@@ -160,8 +160,8 @@ export default function Card(props) {
         </div>
         <h5>{props.dsc}</h5>
         {/* </Link> */}
-        {/* <button className="order-btn" onClick={() => atc(props.num,1)} id={"order" + props.num}>Order Now</button> */}
-        <button className="order-btn" onClick={() => addToCart(props.num)} id={"order" + props.num}>Order Now</button>
+        <button className="order-btn" onClick={() => insertCart(props.num)} id={"order" + props.num}>Order Now</button>
+        {/* <button className="order-btn" onClick={() => addToCart(props.num)} id={"order" + props.num}>Order Now</button> */}
       </div>
     </div>
   );

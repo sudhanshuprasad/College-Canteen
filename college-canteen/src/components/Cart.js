@@ -14,14 +14,15 @@ export default function Cart() {
 
     const host = useContext(urlContext);
     const navigate = useNavigate();
-    let arr = useSelector(state => state.cart);
+    let cart = useSelector(state => state.cart);
+    let login = useSelector(state => state.login);
     const cartSize = useSelector(state => state.cartSize);
+    const cartPrice = useSelector(state => state.cartPrice);
     const dispatch = useDispatch();
 
 
     //get food items in the cart
     const [loaidng, setLoaidng] = useState(true);
-
     const [cartItem, setCartItem] = useState();
 
 
@@ -29,38 +30,39 @@ export default function Cart() {
 
         //remove this redundent fetch request
 
-        let url = `${host}/api/cart/getCart`;
+        // let url = `${host}/api/cart/getCart`;
 
-        // if(true||localStorage.getItem('authToken')!==null){
-        if (localStorage.getItem('authToken') !== null) {
+        // // if(true||localStorage.getItem('authToken')!==null){
+        // if (localStorage.getItem('authToken') !== null) {
 
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*',
-                    'authToken': localStorage.getItem('authToken')
-                }
-            })
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                    console.log(data[0].items);
-                    setCartItem(data[0].items);
-                    dispatch(actionCreaters.setCart(data[0].items));
+        //     fetch(url, {
+        //         method: 'GET',
+        //         headers: {
+        //             'Accept': '*/*',
+        //             'authToken': localStorage.getItem('authToken')
+        //         }
+        //     })
+        //         .then(response => {
+        //             return response.json()
+        //         })
+        //         .then(data => {
+        //             // console.log(data[0].items);
+        //             setCartItem(data[0].items);
+        //             setCartPrice(data.cartPrice);
+        //             dispatch(actionCreaters.setCart(data[0].items));
 
-                    let cartSize=0
-                    data[0].items.map((element)=>{
-                        cartSize+=element.quantity;
-                    })
+        //             let cartSize = 0
+        //             data[0].items.map((element) => {
+        //                 return cartSize += element.quantity;
+        //             })
 
-                    dispatch(actionCreaters.setCartSize(cartSize));
-                    setLoaidng(false);
-                })
-                .catch(() => {
-                    console.log("some error occured while fetching GET request")
-                });
-        }
+        //             dispatch(actionCreaters.setCartSize(cartSize));
+        //             setLoaidng(false);
+        //         })
+        //         .catch(() => {
+        //             console.log("some error occured while fetching GET request")
+        //         });
+        // }
 
     }, [host])
 
@@ -68,9 +70,9 @@ export default function Cart() {
 
     const handleCheckout = () => {
         let url = `${host}/api/order/checkout`;
-        fetch(url,{
-            method:'POST',
-            headers:{
+        fetch(url, {
+            method: 'POST',
+            headers: {
                 'Accept': '*/*',
                 'authToken': localStorage.getItem('authToken')
             }
@@ -92,30 +94,36 @@ export default function Cart() {
         })
             .then(response => response.json())
             .then((data) => {
-                data.success !== null && setCartItem([]);
+                data.success !== null && dispatch(actionCreaters.setCart([]));                ;
                 console.log(data.success)
             })
     }
 
     // if (!loaidng && cartItem !== undefined) {
     return (<>
+        {!login?
+            <div>you need to login first</div>
+        :
+            null
+        }
 
-        {loaidng ? <div>loading</div> : null}
-
-        {cartItem?.map((element) => (
-            <>
-                {/* console.log(element._id) */}
-                <CartItem
-                    key={element._id}
-                    id={element._id}
-                    quantity={element.quantity}
-                    update
-                />
-            </>
+        {login && cart.length==0?
+            <div>your cart is empty</div>
+        :
+            <div></div>
+        }
+        {cart?.map((element) => (
+            <CartItem
+                key={element._id}
+                id={element._id}
+                quantity={element.quantity}
+                update
+            />
         ))}
         {/* {console.log(arr)}{arr[0]?._id} */}
         <button onClick={handleCheckout}>Checkout...</button>
         <button onClick={handleDelete}>Delete All</button>
+        {cartPrice}
     </>
     )
     // } else {

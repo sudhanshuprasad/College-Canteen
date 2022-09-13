@@ -80,10 +80,22 @@
     background-color: black;
 }
 
+#profile {
+    filter: invert();
+    margin: 0px 10px;
+    padding: 10px;
+}
 #cart {
     filter: invert();
     margin: 0px 10px;
     padding: 10px;
+}
+
+.cartSize {
+    position: relative;
+    top: 0%;
+    bottom: 27px;
+    right: 18px;
 }
 
 #right li a{
@@ -119,13 +131,13 @@
 }
 
 /* classes to be added later by javascript */
-.black-bg {
+/* .black-bg {
     background-color: black;
 }
 
 .no-scroll {
     overflow: hidden;
-}
+} */
 
 
 /* removing search bar */ 

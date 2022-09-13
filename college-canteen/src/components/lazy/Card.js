@@ -1,10 +1,10 @@
 import React from 'react'
-import "../css/Card.css";
+import style from "../css/Card.module.css";
 import "./style/Card.css";
 
 function Card() {
     return (
-        <div className='item'>
+        <div className={style.item}>
             <div className='loading-content'>
                 card is loading...
                 <br></br>

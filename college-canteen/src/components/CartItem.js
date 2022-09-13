@@ -31,12 +31,11 @@ export default function CartItem(props) {
     const navigate = useNavigate();
     const controller = new AbortController()
     let cartSize = useSelector(state => state.cartSize);
-
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(props.quantity);
     let cartArray = useSelector(state => state.cart);
 
-
+    
 
     //decrease quantity
     const decqnt = () => {
@@ -57,7 +56,7 @@ export default function CartItem(props) {
             })
 
             setQuantity(quantity - 1);
-            dispatch(actionCreaters.setCartSize(cartSize-1));
+            dispatch(actionCreaters.setCartSize(cartSize - 1));
         }
     }
 
@@ -84,8 +83,31 @@ export default function CartItem(props) {
 
         setQuantity(quantity + 1);
         // dispatch(actionCreaters.setCartSize(cart))
-        dispatch(actionCreaters.setCartSize(cartSize+1));
+        dispatch(actionCreaters.setCartSize(cartSize + 1));
 
+    }
+
+    //delete item
+    const deleteItem = () => {
+
+        let url = `${host}/api/cart/updateCart`;
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                "authToken": localStorage.getItem('authToken')
+            },
+            body: `{"items": ${JSON.stringify(cartArray.filter((element) => {
+                                                    return element._id!==props.id
+                                                }))
+                }}`
+        })
+            .then(response => response.json())
+            .then((data) => {
+                // data.success !== null && setCartItem([]);
+                console.log(data.success)
+            })
     }
 
     const [item, setItem] = useState({ price: 0, name: "unnamed" });
@@ -107,7 +129,7 @@ export default function CartItem(props) {
 
     useEffect(() => {
 
-        return(()=>{
+        return (() => {
             controller.abort();
         })
 
@@ -131,6 +153,11 @@ export default function CartItem(props) {
                     <h2>Quantity: {quantity} {console.log("array is "+cartArray[0]?._id)}</h2>
                     <button onClick={()=>{dispatch(actionCreaters.setCart(cart))}}>+</button> */}
                     {/* <ModifyCart _id={props.id}></ModifyCart> */}
+                    <div>
+                        <img alt='delete'
+                            src="https://img.icons8.com/fluency-systems-regular/48/000000/trash--v1.png"
+                            onClick={deleteItem} />
+                    </div>
                 </div>
             </div>
         </div>

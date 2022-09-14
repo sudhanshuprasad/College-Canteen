@@ -80,6 +80,11 @@
     background-color: black;
 }
 
+.theme img {
+    filter: invert();
+    scale: 0.7;
+}
+
 #profile {
     filter: invert();
     margin: 0px 10px;

@@ -83,9 +83,8 @@ export default function Navbar() {
                         <li onClick={() => {
                             dispatch(actionCreaters.setThemeDark(!theme));
                         }}>
-                            <div>
-                                <img className="theme"
-                                    alt='toggle theme'
+                            <div className="theme">
+                                <img alt='toggle theme'
                                     src="https://img.icons8.com/fluency-systems-regular/48/000000/brightness-settings.png"/>
                             </div>
                         </li>

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import { actionCreaters } from "../state/index";
 import { Link } from "react-router-dom"
+import style from "./css/Profile.module.css"
 
 function Profile(props) {
 
@@ -12,13 +13,14 @@ function Profile(props) {
     const dispatch = useDispatch();
     const login = useSelector(state => state.login);
     const theme = useSelector(state => state.theme);
+    const navigate = useNavigate();
 
-
-    const [userData, setUserData] = useState({ name: props.user })
+    const [userData, setUserData] = useState({ name: props.user });
 
     const handleLogout = () => {
-        dispatch(actionCreaters.setLogin(false))
+        dispatch(actionCreaters.setLogin(false));
         localStorage.removeItem("authToken");
+        navigate('/home');
     }
 
     useMemo(() => {
@@ -55,8 +57,8 @@ function Profile(props) {
     }, []);
 
     return (
-        <div>
-            This is profile
+        <div className={!theme?style.profile:style.profile_dark}>
+            This is your profile
             <br></br>
             {params?.user}
             <hr></hr>
@@ -65,11 +67,12 @@ function Profile(props) {
             {userData?.phone}<br />
             {userData?.timestamp}<br />
             <hr />
-            <li onClick={() => {
+            <button className={!theme?style.btn:style.btn_dark} onClick={() => {
                 dispatch(actionCreaters.setThemeDark(!theme));
-            }}>Theme</li>
-            <button onClick={handleLogout}>
-                <p id='logout'>Logout</p>
+            }}>Theme</button>
+            <hr/>
+            <button className={!theme?style.btn:style.btn_dark} onClick={handleLogout}>
+                LogOut
             </button>
         </div>
     )

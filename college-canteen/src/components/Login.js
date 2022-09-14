@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import { actionCreaters } from "../state/index";
-import './css/Login.css'
+import style from './css/Login.module.css'
 
 // const host = "http://127.0.0.1:5000";
 
@@ -60,11 +60,9 @@ export default function Login() {
 
 
     return (
-        <div id='login-parent' /* className='active' */>
-            <div /* className='transparent' */>
-            </div>
-            <div className='login-container'>
-                <div className='login'>
+        // <div id='login-parent' /* className='active' */>
+            <div className={style.login_container}>
+                <div className={style.login}>
                     <div>
                         <label htmlFor='User_ID'>Enter Email ID:</label><br />
                         <input type="text" name='User_ID' id='User_Id' placeholder='User ID'></input><br />
@@ -77,13 +75,12 @@ export default function Login() {
                         <button onClick={handlelogin}>Login</button>
                         <br />
                     </div>
-                        <sapn className="error">{error}</sapn>
+                        <span className="error">{error}</span>
                     <div>
-                        <p>New User?</p>
-                        <Link to="/signup" >Sign Up</Link>
+                        New User? <Link className={style.signup} to="/signup" >Sign Up</Link>
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     );
 }

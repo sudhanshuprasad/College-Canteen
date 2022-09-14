@@ -10,11 +10,12 @@
   }
 
   .item img {
+    margin: auto;
     height: 225px;
     width: 100%;
     object-fit: cover;
   }
-
+  
   .item * {
     padding: 0px;
     margin: 0px;
@@ -51,4 +52,14 @@
   h5 {
     height: 50px;
     overflow: hidden;
+    box-shadow: inset 0px -38px 5px -29px rgb(255, 255, 255);
+    z-index: 1;
+  }
+
+  h5 div {
+    height: 50px;
+    overflow: hidden;
+    /* background-color: rgb(255, 0, 0); */
+    /* box-shadow: inset 0px -40px 10px -29px rgba(255, 255, 255, 0.5); */
+    z-index: -1;
   }

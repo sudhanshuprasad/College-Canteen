@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './css/Login.css';
+// import './css/Login.css';
 import './css/Cart.css';
 import CartItem from './CartItem';
 import urlContext from '../context/api_url/urlContext';
@@ -94,22 +94,22 @@ export default function Cart() {
         })
             .then(response => response.json())
             .then((data) => {
-                data.success !== null && dispatch(actionCreaters.setCart([]));                ;
+                data.success !== null && dispatch(actionCreaters.setCart([]));;
                 console.log(data.success)
             })
     }
 
     // if (!loaidng && cartItem !== undefined) {
     return (<>
-        {!login?
+        {!login ?
             <div>you need to login first</div>
-        :
+            :
             null
         }
 
-        {login && cart.length==0?
+        {login && cart.length == 0 ?
             <div>your cart is empty</div>
-        :
+            :
             <div></div>
         }
         {cart?.map((element) => (
@@ -120,10 +120,14 @@ export default function Cart() {
                 update
             />
         ))}
-        {/* {console.log(arr)}{arr[0]?._id} */}
-        <button onClick={handleCheckout}>Checkout...</button>
-        <button onClick={handleDelete}>Delete All</button>
-        {cartPrice}
+        {cart ?
+            <>
+                <button onClick={handleCheckout}>Checkout...</button>
+                <button onClick={handleDelete}>Delete All</button>
+                <div className='cartPrice'>Total: &#8377;{cartPrice}</div>
+            </>
+            :
+            null}
     </>
     )
     // } else {

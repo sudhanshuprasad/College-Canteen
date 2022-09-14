@@ -5,6 +5,7 @@ import urlContext from "../context/api_url/urlContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreaters } from "../state";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { addToCart as atc } from "../utilities";
 
 // const host = "http://127.0.0.1:5000";
@@ -166,7 +167,13 @@ export default function Card(props) {
   return (
     <div className={style.item} id={"item" + props.num}>
       <Link to={`/product/${props.num}`}>
-        <img src={props.imgurl} alt="food" loading="lazy" />
+        {/* <img src={props.imgurl} alt="food" loading="lazy" /> */}
+        <LazyLoadImage src={props.imgurl}
+        /* width={225} height={100} */
+        threshold={50}
+        alt="food"
+        // effect="blur"
+      />
       </Link>
       <div className={style.content}>
         {/* <Link to={`/product/${props.num}`}> */}
@@ -174,7 +181,7 @@ export default function Card(props) {
           <h3>{props.foodName}</h3>
           <h3>&#8377;{props.price}</h3>
         </div>
-        <h5>{props.dsc}</h5>
+        <h5><div>{props.dsc}</div></h5>
         {/* </Link> */}
         <button className={style.order_btn}
           onClick={() =>

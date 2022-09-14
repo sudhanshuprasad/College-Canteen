@@ -4,6 +4,7 @@ import cartReducer from "./cartReducer"
 import loginReducer from "./loginReducer"
 import themeReducer from "./themeReducer"
 import cartSizeReducer from "./cartSizeReducer"
+import cartPriceReducer from "./cartPriceReducer"
 
 const reducers=combineReducers({
     quantity:quantityReducer,
@@ -11,6 +12,7 @@ const reducers=combineReducers({
     login:loginReducer,
     theme:themeReducer,
     cartSize:cartSizeReducer,
+    cartPrice:cartPriceReducer,
 })
 
 export default reducers

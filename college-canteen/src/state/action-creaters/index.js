@@ -34,6 +34,15 @@ export const setCartSize = (cartSize) => {
     }
 }
 
+export const setCartPrice = (cartPrice) => {
+    return (dispatch) => {
+        dispatch({
+            type: "setCartPrice",
+            payload: cartPrice,
+        })
+    }
+}
+
 export const setLogin = (login) =>{
     return (dispatch) => {
         dispatch({

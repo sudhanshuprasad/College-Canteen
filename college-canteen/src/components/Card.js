@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import PropTypes from 'prop-types'
-import "./css/Card.css";
+import style from "./css/Card.module.css";
 import urlContext from "../context/api_url/urlContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreaters } from "../state";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { addToCart as atc } from "../utilities";
 
 // const host = "http://127.0.0.1:5000";
@@ -73,6 +74,8 @@ export default function Card(props) {
 
   const host = useContext(urlContext)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const login = useSelector(state => state.login);
   const localCart = useSelector(state => state.cart);
 
   // let cartItem = [{ _id: "62278be34e90e53ae1b763be", quantity: 2 }, { _id: "62278ce84e90e53ae1b763c0", quantity: 3 },];
@@ -87,24 +90,24 @@ export default function Card(props) {
     // console.log([...localCart, { _id: foodID, quantity: 1 }]);
 
     //check if the food is already in the cart
-    if(localCart.length===0){
-      
+    if (localCart.length === 0) {
+
       dispatch(actionCreaters.setCart([{ _id: foodID, quantity: 1 }]));
       console.log("local cart is empty")
 
-      fetch(url,{
+      fetch(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           "authToken": localStorage.getItem('authToken')
         },
         body: `{"items":${JSON.stringify([{ _id: foodID, quantity: 1 }, ...localCart])}}`
-      }).then(()=>{
+      }).then(() => {
         window.alert('food added, check cart')
       })
 
     }
-    else{
+    else {
       insertCart(foodID);
     }
 
@@ -129,6 +132,12 @@ export default function Card(props) {
   //function to add an item to the cart by sending the item only
   function insertCart(foodID) {
 
+    if (!login) {
+      window.alert("You need login first")
+      navigate("/login")
+      return
+    }
+
     const url = `${host}/api/cart/insertCart`;
 
     fetch(url, {
@@ -143,24 +152,44 @@ export default function Card(props) {
       .then(response => response.json())
       .then((data) => {
         console.log(data);
+        dispatch(actionCreaters.setCart(data.cart.items));
+        let cartSize = 0
+        data.cart.items.map((element)=>{
+          cartSize+=element.quantity
+          return cartSize
+        })
+        console.log(cartSize)
+        dispatch(actionCreaters.setCartSize(cartSize));
         window.alert('food added, check cart')
       })
   }
 
   return (
-    <div className="item" id={"item" + props.num}>
+    <div className={style.item} id={"item" + props.num}>
       <Link to={`/product/${props.num}`}>
-        <img src={props.imgurl} alt="food" loading="lazy"/>
+        {/* <img src={props.imgurl} alt="food" loading="lazy" /> */}
+        <LazyLoadImage src={props.imgurl}
+        /* width={225} height={100} */
+        threshold={50}
+        alt="food"
+        // effect="blur"
+      />
       </Link>
-      <div className="content">
+      <div className={style.content}>
         {/* <Link to={`/product/${props.num}`}> */}
-        <div className="item_name">
+        <div className={style.item_name}>
           <h3>{props.foodName}</h3>
           <h3>&#8377;{props.price}</h3>
         </div>
-        <h5>{props.dsc}</h5>
+        <h5><div>{props.dsc}</div></h5>
         {/* </Link> */}
-        <button className="order-btn" onClick={() => insertCart(props.num)} id={"order" + props.num}>Order Now</button>
+        <button className={style.order_btn}
+          onClick={() =>
+            insertCart(props.num)
+          }
+          id={"order" + props.num}>
+          Order Now
+        </button>
         {/* <button className="order-btn" onClick={() => addToCart(props.num)} id={"order" + props.num}>Order Now</button> */}
       </div>
     </div>

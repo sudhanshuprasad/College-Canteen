@@ -29,6 +29,8 @@ export default function Navbar() {
     useEffect(() => {
         localStorage.getItem('authToken') && dispatch(actionCreaters.setLogin(true));
 
+        if(!localStorage.getItem('authToken')) return
+
         let url = `${host}/api/cart/getCart`;
 
         // if(true||localStorage.getItem('authToken')!==null){
@@ -46,11 +48,14 @@ export default function Navbar() {
                 })
                 .then(data => {
                     console.log(data[0].items);
-                    // dispatch(actionCreaters.setCart(data[0].items));
+                    dispatch(actionCreaters.setCart(data[0].items));
+                    dispatch(actionCreaters.setCartPrice(data.cartPrice));
+                    // console.log(data.cartPrice)
 
-                    let cartSize=0
-                    data[0].items.map((element)=>{
-                        cartSize+=element.quantity;
+                    let cartSize = 0
+                    data[0].items.map((element) => {
+                        cartSize += element.quantity;
+                        return 0
                     })
 
                     dispatch(actionCreaters.setCartSize(cartSize));
@@ -70,25 +75,36 @@ export default function Navbar() {
                         <li><Link to="/home"><h2 id="fc">FC</h2></Link></li>
                         <li><img id='fclogo' src='https://img.icons8.com/color-glass/90/000000/bread-and-rolling-pin.png' alt='fc logo' /></li>
                     </ul>
-                    {login ? <ul className='nav-ul search-area' id="search-area">
+                    {/* {login ? <ul className='nav-ul search-area' id="search-area">
                         <li><input placeholder='Search' type='text' name='search-text' id="search-bar" /></li>
                         <li><img src='https://img.icons8.com/ios-filled/25/000000/search--v1.png' alt='search' id="search-icon" /></li>
-                    </ul> : null}
+                    </ul> : null} */}
                     <ul className='nav-ul' id="right">
                         <li onClick={() => {
                             dispatch(actionCreaters.setThemeDark(!theme));
-                        }}>Theme</li>
+                        }}>
+                            <div className="theme">
+                                <img alt='toggle theme'
+                                    src="https://img.icons8.com/fluency-systems-regular/48/000000/brightness-settings.png"/>
+                            </div>
+                        </li>
                         {!login ? <li onClick={() => {
                             // SetLogin(true);
                             // dispatch(actionCreaters.setLogin(!login))
                         }}><Link to="/login"><p id='login'>Login</p></Link></li>
-                            : <li onClick={handleLogout}><p id='login'>Logout</p></li>}
+                            : null /* <li onClick={handleLogout}><p id='login'>Logout</p></li> */}
                         {login ? <>
+                            <li>
+                                <Link to="/profile/a">
+                                    <img src="https://img.icons8.com/windows/32/000000/user-male-circle.png" alt="cart" id="profile" />
+                                </Link>
+                            </li>
                             <li>
                                 <Link to="/cart">
                                     <img src="https://img.icons8.com/ios-glyphs/30/000000/shopping-cart--v1.png" alt="cart" id="cart" />
-                                </Link></li>
-                            <li>{cartSize}</li>
+                                </Link>
+                                <span className="cartSize">{cartSize}</span>
+                            </li>
                         </> : null}
                     </ul>
                 </div>

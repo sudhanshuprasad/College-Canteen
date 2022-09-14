@@ -37,22 +37,22 @@ export default function Grid() {
 
     //set localcart
 
-    if (login) {
+    // if (login) {
 
-      fetch(`${host}/api/cart/getCart`, {
-        method: 'GET',
-        headers: {
-          'Accept': '*/*',
-          'authToken': localStorage.getItem('authToken')
-        }
-      })
-        .then((response) => response.json())
-        .then(data => {
-          dispatch(actionCreaters.setCart(data[0].items))
-          console.log(data[0].items);
-        })
+    //   fetch(`${host}/api/cart/getCart`, {
+    //     method: 'GET',
+    //     headers: {
+    //       'Accept': '*/*',
+    //       'authToken': localStorage.getItem('authToken')
+    //     }
+    //   })
+    //     .then((response) => response.json())
+    //     .then(data => {
+    //       dispatch(actionCreaters.setCart(data[0].items))
+    //       console.log(data[0].items);
+    //     })
 
-    }
+    // }
 
   }, [host])
 
@@ -64,7 +64,7 @@ export default function Grid() {
     }}>
       {
         foodItem.map((element) => (
-          <>
+          <div key={element._id}>
             <Suspense fallback={<LazyCard />}>
               <Card
                 key={element._id}
@@ -75,7 +75,7 @@ export default function Grid() {
                 dsc={element.dsc}
               />
             </Suspense>
-          </>
+          </div>
         ))
       }
       {loading ? <div>Loading...</div> : null}

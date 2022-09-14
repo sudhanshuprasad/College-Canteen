@@ -6,6 +6,7 @@ import "./css/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
 import { useNavigate } from "react-router-dom";
 import ModifyCart from "../utilities/ModifyCart";
+import { LazyLoadImage, trackWindowScroll } from "react-lazy-load-image-component";
 
 // const host = "http://127.0.0.1:5000";
 
@@ -31,7 +32,6 @@ export default function CartItem(props) {
     const navigate = useNavigate();
     const controller = new AbortController()
     let cartSize = useSelector(state => state.cartSize);
-
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(props.quantity);
     let cartArray = useSelector(state => state.cart);
@@ -57,7 +57,7 @@ export default function CartItem(props) {
             })
 
             setQuantity(quantity - 1);
-            dispatch(actionCreaters.setCartSize(cartSize-1));
+            dispatch(actionCreaters.setCartSize(cartSize - 1));
         }
     }
 
@@ -84,8 +84,31 @@ export default function CartItem(props) {
 
         setQuantity(quantity + 1);
         // dispatch(actionCreaters.setCartSize(cart))
-        dispatch(actionCreaters.setCartSize(cartSize+1));
+        dispatch(actionCreaters.setCartSize(cartSize + 1));
 
+    }
+
+    //delete item
+    const deleteItem = () => {
+
+        let url = `${host}/api/cart/updateCart`;
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json',
+                "authToken": localStorage.getItem('authToken')
+            },
+            body: `{"items": ${JSON.stringify(cartArray.filter((element) => {
+                return element._id !== props.id
+            }))
+                }}`
+        })
+            .then(response => response.json())
+            .then((data) => {
+                // data.success !== null && setCartItem([]);
+                console.log(data.success)
+            })
     }
 
     const [item, setItem] = useState({ price: 0, name: "unnamed" });
@@ -107,7 +130,7 @@ export default function CartItem(props) {
 
     useEffect(() => {
 
-        return(()=>{
+        return (() => {
             controller.abort();
         })
 
@@ -116,7 +139,12 @@ export default function CartItem(props) {
     return (
         <div className="cartitem" id={"item" + item?._id} key={item?._id}>
             <div className="cartItem_image" onClick={() => { navigate(`/product/${item._id}`) }}>
-                <img src="https://picsum.photos/30" alt="food" />
+                {/* <img src="https://picsum.photos/30" alt="food" loading="lazy" /> */}
+                <LazyLoadImage src="https://picsum.photos/30"
+                    /* width={600} height={400} */
+                    scrollPosition={trackWindowScroll}
+                    alt="Image Alt"
+                />
             </div>
             <div className="cartitem_content">
                 <div className="cartitem_name" onClick={() => { navigate(`/product/${item._id}`) }}>
@@ -131,6 +159,11 @@ export default function CartItem(props) {
                     <h2>Quantity: {quantity} {console.log("array is "+cartArray[0]?._id)}</h2>
                     <button onClick={()=>{dispatch(actionCreaters.setCart(cart))}}>+</button> */}
                     {/* <ModifyCart _id={props.id}></ModifyCart> */}
+                    <div>
+                        <img alt='delete'
+                            src="https://img.icons8.com/fluency-systems-regular/48/000000/trash--v1.png"
+                            onClick={deleteItem} />
+                    </div>
                 </div>
             </div>
         </div>

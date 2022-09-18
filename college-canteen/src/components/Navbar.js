@@ -96,7 +96,7 @@ export default function Navbar() {
                         {login ? <>
                             <li>
                                 <Link to="/profile/a">
-                                    <img src="https://img.icons8.com/windows/32/000000/user-male-circle.png" alt="cart" id="profile" />
+                                    <img src="https://img.icons8.com/windows/32/000000/user-male-circle.png" alt="profile" id="profile" />
                                 </Link>
                             </li>
                             <li>

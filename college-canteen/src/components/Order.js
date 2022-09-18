@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import './css/Login.css';
-import './css/Cart.css';
+import style from './css/Cart.module.css';
 import OrderItem from './OrderItem';
 import urlContext from '../context/api_url/urlContext';
 

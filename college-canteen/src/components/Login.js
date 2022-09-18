@@ -18,7 +18,7 @@ export default function Login() {
     function handlelogin() {
         const url = `${host}/api/auth/login`;
         let credentials = {
-            "email": document.getElementById('User_Id').value,
+            "email": document.getElementById('User_ID').value,
             "password": document.getElementById('password').value
             // "email": "mymail@gmail.com",
             // "password": "fcukyou"
@@ -54,7 +54,7 @@ export default function Login() {
     }
     useEffect(() => {
         if (localStorage.getItem('authToken')) {
-            // setLogin(true);
+            navigate('/profile');
         }
     }, [])
 
@@ -63,19 +63,20 @@ export default function Login() {
         // <div id='login-parent' /* className='active' */>
             <div className={style.login_container}>
                 <div className={style.login}>
-                    <div>
-                        <label htmlFor='User_ID'>Enter Email ID:</label><br />
-                        <input type="text" name='User_ID' id='User_Id' placeholder='User ID'></input><br />
+                    <div className={style.User_ID}>
+                        {/* <div>Enter Email ID: </div> */}
+                        <input className={style.email} type="email" name='User_ID' id='User_ID' placeholder='Email ID'></input><br />
+                        {/* <label className={style.enter_email} htmlFor='User_ID'>Email ID:</label> */}
                     </div>
-                    <div>
-                        <label htmlFor='password'>Enter password:</label><br />
-                        <input type="password" name="password" id="password" placeholder='Password'></input><br />
+                    <div className={style.password}>
+                        {/* <label htmlFor='password'>Enter password:</label><br /> */}
+                        <input type="password" name="password" id='password' placeholder='Password'></input><br />
                     </div>
                     <div>
                         <button onClick={handlelogin}>Login</button>
                         <br />
                     </div>
-                        <span className="error">{error}</span>
+                        <span className={style.error}>{error}</span>
                     <div>
                         New User? <Link className={style.signup} to="/signup" >Sign Up</Link>
                     </div>

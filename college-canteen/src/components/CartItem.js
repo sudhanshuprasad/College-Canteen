@@ -34,8 +34,9 @@ export default function CartItem(props) {
     let cartSize = useSelector(state => state.cartSize);
     const dispatch = useDispatch();
     const [quantity, setQuantity] = useState(props.quantity);
+    const cartPrice = useSelector(state => state.cartPrice);
     let cartArray = useSelector(state => state.cart);
-
+    //cartArray needs to be updated on increment and decrement  of the quantity
 
 
     //decrease quantity
@@ -54,9 +55,14 @@ export default function CartItem(props) {
                     _id: props.id,
                     quantity: quantity - 1,
                 })
-            })
+            }).catch(()=>{
+                console.log("unable to decrease quantity ");
+                // setQuantity(quantity + 1);
+                return;
+            },[])
 
             setQuantity(quantity - 1);
+            dispatch(actionCreaters.setCartPrice(cartPrice - item?.price));
             dispatch(actionCreaters.setCartSize(cartSize - 1));
         }
     }
@@ -80,12 +86,16 @@ export default function CartItem(props) {
                 "_id": props.id,
                 "quantity": quantity + 1,
             })
+        }).catch(()=>{
+            console.log("unable to increase quantity ");
+            //setQuantity(quantity - 1);
+            return
         })
 
         setQuantity(quantity + 1);
         // dispatch(actionCreaters.setCartSize(cart))
         dispatch(actionCreaters.setCartSize(cartSize + 1));
-
+        dispatch(actionCreaters.setCartPrice(cartPrice + item?.price));
     }
 
     //delete item
@@ -106,6 +116,12 @@ export default function CartItem(props) {
         })
             .then(response => response.json())
             .then((data) => {
+                dispatch(actionCreaters.setCartSize(cartSize - quantity));
+                dispatch(actionCreaters.setCartPrice(cartPrice - (item?.price*quantity)));
+                dispatch(actionCreaters.setCart(cartArray.filter((element)=>{
+                    if(element._id===props.id) return false
+                    return true;
+                })))
                 // data.success !== null && setCartItem([]);
                 console.log(data.success)
             })

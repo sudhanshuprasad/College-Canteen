@@ -77,6 +77,7 @@ export default function Card(props) {
   const navigate = useNavigate();
   const login = useSelector(state => state.login);
   const localCart = useSelector(state => state.cart);
+  const cartPrice = useSelector(state => state.cartPrice);
 
   // let cartItem = [{ _id: "62278be34e90e53ae1b763be", quantity: 2 }, { _id: "62278ce84e90e53ae1b763c0", quantity: 3 },];
 
@@ -134,7 +135,15 @@ export default function Card(props) {
 
     if (!login) {
       window.alert("You need login first")
-      navigate("/login")
+      return
+    }
+    
+    if(localCart.some((element)=>{
+      return element._id===foodID;
+    }))
+    {
+      window.alert("Item already in cart")
+      navigate("/cart")
       return
     }
 
@@ -155,11 +164,12 @@ export default function Card(props) {
         dispatch(actionCreaters.setCart(data.cart.items));
         let cartSize = 0
         data.cart.items.map((element)=>{
-          cartSize+=element.quantity
+          cartSize+=element.quantity;
           return cartSize
         })
         console.log(cartSize)
         dispatch(actionCreaters.setCartSize(cartSize));
+        dispatch(actionCreaters.setCartPrice(cartPrice+props.price));
         window.alert('food added, check cart')
       })
   }

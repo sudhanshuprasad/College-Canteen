@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import './css/Login.css';
-import './css/Cart.css';
+import style from './css/Cart.module.css';
 import CartItem from './CartItem';
 import urlContext from '../context/api_url/urlContext';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -16,7 +16,8 @@ export default function Cart() {
     const navigate = useNavigate();
     let cart = useSelector(state => state.cart);
     let login = useSelector(state => state.login);
-    const cartSize = useSelector(state => state.cartSize);
+    const theme = useSelector(state => state.theme);
+    // const cartSize = useSelector(state => state.cartSize);
     const cartPrice = useSelector(state => state.cartPrice);
     const dispatch = useDispatch();
 
@@ -94,13 +95,16 @@ export default function Cart() {
         })
             .then(response => response.json())
             .then((data) => {
-                data.success !== null && dispatch(actionCreaters.setCart([]));;
+                data.success !== null && dispatch(actionCreaters.setCart([]));
                 console.log(data.success)
             })
     }
 
     // if (!loaidng && cartItem !== undefined) {
-    return (<>
+    return (<div style={{
+        backgroundColor: theme ? "rgb(100,100,100)" : "white",
+        color: theme ? "white" : "black",
+      }}>
         {!login ?
             <div>you need to login first</div>
             :
@@ -122,13 +126,14 @@ export default function Cart() {
         ))}
         {cart ?
             <>
+                <br/>
                 <button onClick={handleCheckout}>Checkout...</button>
                 <button onClick={handleDelete}>Delete All</button>
-                <div className='cartPrice'>Total: &#8377;{cartPrice}</div>
+                <div className={style.cartPrice}>Total: &#8377;{cartPrice}</div>
             </>
             :
             null}
-    </>
+    </div>
     )
     // } else {
     //     //do not use multiple return statement next time

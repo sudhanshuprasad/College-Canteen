@@ -70,7 +70,11 @@ function Profile(props) {
             <button className={!theme?style.btn:style.btn_dark} onClick={() => {
                 dispatch(actionCreaters.setThemeDark(!theme));
             }}>Theme</button>
+            <br></br>
+            <Link to={'/order'}>Order</Link>
+            
             <hr/>
+            
             <button className={!theme?style.btn:style.btn_dark} onClick={handleLogout}>
                 LogOut
             </button>

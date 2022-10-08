@@ -5,6 +5,7 @@ import urlContext from '../context/api_url/urlContext';
 import LazyCard from './lazy/Card'
 import "./css/Grid.css";
 import { actionCreaters } from '../state';
+import LoadingGrid from './lazy/LoadingGrid';
 const Card = React.lazy(() => import("./Card.js"));
 
 // const host="http://127.0.0.1:5000";
@@ -78,7 +79,7 @@ export default function Grid() {
           </div>
         ))
       }
-      {loading ? <div>Loading...</div> : null}
+      {loading ? <LoadingGrid/> : null}
     </div>
   )
 }

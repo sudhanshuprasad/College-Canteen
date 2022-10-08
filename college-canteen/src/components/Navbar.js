@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreaters } from "../state/index";
 import urlContext from "../context/api_url/urlContext";
+import Axios from 'axios';
 
 
 export default function Navbar() {
@@ -35,19 +36,31 @@ export default function Navbar() {
 
         // if(true||localStorage.getItem('authToken')!==null){
         if (localStorage.getItem('authToken') !== null) {
+            
+            // async function fetchUser() {
+            // const axres = await Axios.get(url, {withCredentials:true}).catch((err) => {console.log(err)})
+            // console.log(axres)
+            // }
+            // fetchUser();
 
+            // // same request but with fetch
             fetch(url, {
                 method: 'GET',
                 headers: {
                     'Accept': '*/*',
                     'authToken': localStorage.getItem('authToken')
-                }
+                },
+                // credentials: 'include'
             })
                 .then(response => {
+                    // console.log(response)
                     return response.json()
                 })
                 .then(data => {
-                    console.log(data[0].items);
+                    if(Object.keys(data).length===0) return
+
+                    // console.log(Object.keys(data).length);
+                    // console.log(data[0].items);
                     dispatch(actionCreaters.setCart(data[0].items));
                     dispatch(actionCreaters.setCartPrice(data.cartPrice));
                     // console.log(data.cartPrice)
@@ -60,8 +73,8 @@ export default function Navbar() {
 
                     dispatch(actionCreaters.setCartSize(cartSize));
                 })
-                .catch(() => {
-                    console.log("some error occured while fetching GET request")
+                .catch((error) => {
+                    console.log("some error occured while fetching GET request", error)
                 });
         }
 

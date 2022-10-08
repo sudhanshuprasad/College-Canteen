@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react';
+import GoogleButton from 'react-google-button';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
@@ -52,6 +53,13 @@ export default function Login() {
             });
 
     }
+
+    const googleSSOLogin = (req, res) => {
+
+        const gooleLoginUrl = `http://localhost:5000/api/passport-auth/google`
+        const newWindow = window.open(gooleLoginUrl, '_self', 'height=600,width=500');
+    }
+
     useEffect(() => {
         if (localStorage.getItem('authToken')) {
             navigate('/profile');
@@ -74,7 +82,10 @@ export default function Login() {
                     </div>
                     <div>
                         <button onClick={handlelogin}>Login</button>
-                        <br />
+                    </div>
+                    <div>
+                        <hr />
+                        <GoogleButton onClick={googleSSOLogin} />
                     </div>
                         <span className={style.error}>{error}</span>
                     <div>

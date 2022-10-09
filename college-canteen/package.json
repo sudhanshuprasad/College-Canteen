@@ -18,7 +18,8 @@
     "react-scripts": "5.0.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-google-button": "^8.5.0"
   },
   "scripts": {
     "start": "react-dotenv && react-scripts start",

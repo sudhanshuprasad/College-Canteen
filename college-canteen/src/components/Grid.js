@@ -27,7 +27,7 @@ export default function Grid() {
   const lastCard = document.querySelector('.loading');
   // console.log(lastCard);
   const observer = new IntersectionObserver((entries) => {
-    // console.log('is intersecting ',entries[0].isIntersecting)
+    console.log('is intersecting ',entries[0].isIntersecting)
     if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
       console.log('fetch more called, fetching data : ', foodItem.length)
       fetchMoreData();

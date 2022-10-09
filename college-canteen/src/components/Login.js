@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react';
-import GoogleButton from 'react-google-button';
+// import GoogleButton from 'react-google-button';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
@@ -85,7 +85,8 @@ export default function Login() {
                     </div>
                     <div>
                         <hr />
-                        <GoogleButton onClick={googleSSOLogin} />
+                        <button onClick={googleSSOLogin}>Sign in with google</button>
+                        {/* <GoogleButton onClick={googleSSOLogin} /> */}
                     </div>
                         <span className={style.error}>{error}</span>
                     <div>

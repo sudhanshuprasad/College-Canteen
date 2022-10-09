@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import urlContext from '../context/api_url/urlContext';
 // import Card from './Card'
@@ -27,9 +27,9 @@ export default function Grid() {
   const lastCard = document.querySelector('.loading');
   // console.log(lastCard);
   const observer = new IntersectionObserver((entries) => {
-    console.log('is intersecting ',entries[0].isIntersecting)
+    // console.log('is intersecting ',entries[0].isIntersecting)
     if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
-      console.log('fetch more called, fetching data : ', foodItem.length)
+      // console.log('fetch more called, fetching data : ', foodItem.length)
       fetchMoreData();
     }
 
@@ -99,6 +99,24 @@ export default function Grid() {
 
   // }, [host])
 
+  useMemo(() => {
+    console.log("hello");
+    
+    let url = `${host}/api/fooditem/getFood?page=${1}&size=${3}`;
+
+    fetch(url)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setFoodItem(data);
+        setLoading(false);
+
+        //set localcart
+        console.log('useMemo: ',foodItem)
+
+      });
+  }, [])
 
   useEffect(() => {
     console.log('useeffect ',foodItem)

@@ -12,39 +12,41 @@ const Card = React.lazy(() => import("./Card.js"));
 // const host="http://127.0.0.1:5000";
 
 export default function Grid() {
-
+  
   const host = useContext(urlContext);
   const [foodItem, setFoodItem] = useState([]);
   const theme = useSelector(state => state.theme);
+  const [loading, setLoading] = useState(true);
   const login = useSelector(state => state.login);
   const dispatch = useDispatch()
   
   //infinite scroll
   const fetchingData = useRef(false);
   const hasMore = useRef(true);
-  // const page = useRef(1);
+  const page = useRef(1);
+  const size = 3;
 
-  const lastCard = document.querySelector('.loading');
-  // console.log(lastCard);
-  const observer = new IntersectionObserver((entries) => {
-    // console.log('is intersecting ',entries[0].isIntersecting)
-    if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
-      // console.log('fetch more called, fetching data : ', foodItem.length)
-      fetchMoreData();
-    }
+  // const lastCard = document.querySelector('.loading');
+  // // console.log(lastCard);
+  // const observer = new IntersectionObserver((entries) => {
+  //   // console.log('is intersecting ',entries[0].isIntersecting)
+  //   if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
+  //     // console.log('fetch more called, fetching data : ', foodItem.length)
+  //     fetchMoreData();
+  //   }
 
-  });
+  // });
 
-  if (lastCard != null) {
-    observer.observe(lastCard);
-  }
+  // if (lastCard != null) {
+  //   observer.observe(lastCard);
+  // }
 
   const fetchMoreData = () => {
     fetchingData.current=true;
     // console.log("fetching more data... ", fetchingData.current);
     console.log(foodItem.length)
-    const pageno=foodItem.length/3;
-    const url = `${host}/api/fooditem/getFood?page=${pageno+1}&size=${3}`;
+    const pageno=Math.ceil(foodItem.length/size);
+    const url = `${host}/api/fooditem/getFood?page=${pageno+1}&size=${size}`;
     // page.current++;
     fetch(url)
       .then(response => {
@@ -53,15 +55,17 @@ export default function Grid() {
       .then(data => {
         console.log('setfooditem: ',foodItem)
         console.log('data ', data)
-        if(data && data.length==0){
-          hasMore = false.current;
+        if(data && data.length===0){
+          console.log('last object')
+          setLoading(false);
+          hasMore.current = false.current;
         }
         // console.log("fetched more data... ", fetchingData.current);
         
+        setFoodItem([...foodItem, ...data]);
+        console.log('settimeout: ',foodItem)
+        fetchingData.current=false;
         setTimeout(() => {
-          setFoodItem([...foodItem, ...data]);
-          console.log('settimeout: ',foodItem)
-          fetchingData.current=false;
           // console.log("after timout ", fetchingData.current);
         }, 10);
         //set localcart
@@ -70,7 +74,6 @@ export default function Grid() {
       });
   }
 
-  const [loading, setLoading] = useState(true);
 
   //get food items
 
@@ -100,8 +103,9 @@ export default function Grid() {
   // }, [host])
 
   useMemo(() => {
+
     console.log("hello");
-    
+    // setLoading(true);
     let url = `${host}/api/fooditem/getFood?page=${1}&size=${3}`;
 
     fetch(url)
@@ -110,7 +114,7 @@ export default function Grid() {
       })
       .then(data => {
         setFoodItem(data);
-        setLoading(false);
+        // setLoading(false);
 
         //set localcart
         console.log('useMemo: ',foodItem)
@@ -119,7 +123,31 @@ export default function Grid() {
   }, [])
 
   useEffect(() => {
-    console.log('useeffect ',foodItem)
+
+
+    
+    const lastCard = document.querySelector('.loading');
+    // console.log(lastCard);
+    const observer = new IntersectionObserver((entries) => {
+      // console.log('is intersecting ',entries[0].isIntersecting)
+      if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
+        // console.log('fetch more called, fetching data : ', foodItem.length)
+        fetchMoreData();
+      }
+  
+    });
+  
+    if (lastCard != null) {
+      observer.observe(lastCard);
+    }
+
+
+
+
+    console.log('useeffect ',foodItem);
+    page.current=foodItem.length/size;
+    page.current=Math.ceil(foodItem.length/size);
+    console.log('page: ',page.current);
   },[foodItem])
 
   return (
@@ -171,7 +199,8 @@ export default function Grid() {
         ))
       }
 
-      <footer className='loading'>loading more...</footer>
+      {loading?<footer className='loading'>loading more...</footer>:<footer>End</footer>}
+      
 
       {/* {loading ? <LoadingGrid /> : null} */}
     </div>

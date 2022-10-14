@@ -76,10 +76,21 @@ export default function Card(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const login = useSelector(state => state.login);
+  const theme = useSelector(state => state.theme);
   const localCart = useSelector(state => state.cart);
   const cartPrice = useSelector(state => state.cartPrice);
 
+
   // let cartItem = [{ _id: "62278be34e90e53ae1b763be", quantity: 2 }, { _id: "62278ce84e90e53ae1b763c0", quantity: 3 },];
+
+//   if(!theme) {
+//     // document.body.style = 'background: red;';
+//     document.querySelector('.fade')?.classList.add(style.light);
+// }
+// else{
+//     // document.body.style = 'background: green;';
+//     document.querySelector('.fade')?.classList.remove(style.light);
+// }
 
   useEffect(() => {
     // dispatch(actionCreaters.setCart(cartItem))
@@ -191,7 +202,8 @@ export default function Card(props) {
           <h3>{props.foodName}</h3>
           <h3>&#8377;{props.price}</h3>
         </div>
-        <h5><div>{props.dsc}</div></h5>
+        <div>{props.dsc}</div>
+        <h5 className={!theme?style.light:null}>‎ {/* this is an invisible character */}</h5>
         {/* </Link> */}
         <button className={style.order_btn}
           onClick={() =>

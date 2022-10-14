@@ -18,6 +18,15 @@ export default function Navbar() {
     const theme = useSelector(state => state.theme);
     const cartSize = useSelector(state => state.cartSize);
 
+
+    if(theme) {
+        // document.body.style = 'background: red;';
+        document.body.classList.add('background-dark');
+    }
+    else{
+        // document.body.style = 'background: green;';
+        document.body.classList.remove('background-dark');
+    }
     // const [login, SetLogin] = useState([Boolean(localStorage.getItem('authToken'))]);
     // let navigate=useNavigate();
     const handleLogout = () => {

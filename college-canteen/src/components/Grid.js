@@ -17,7 +17,7 @@ export default function Grid() {
   const [foodItem, setFoodItem] = useState([]);
   const theme = useSelector(state => state.theme);
   const [loading, setLoading] = useState(true);
-  const login = useSelector(state => state.login);
+  // const login = useSelector(state => state.login);
   const dispatch = useDispatch()
   
   //infinite scroll
@@ -26,36 +26,37 @@ export default function Grid() {
   const page = useRef(1);
   const size = 3;
 
-  // const lastCard = document.querySelector('.loading');
-  // // console.log(lastCard);
-  // const observer = new IntersectionObserver((entries) => {
-  //   // console.log('is intersecting ',entries[0].isIntersecting)
-  //   if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
-  //     // console.log('fetch more called, fetching data : ', foodItem.length)
-  //     fetchMoreData();
-  //   }
+  const lastCard = document.querySelector('.loading');
+  // console.log(lastCard);
+  const observer = new IntersectionObserver((entries) => {
+    // console.log('is intersecting ',entries[0].isIntersecting)
+    if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
+      // console.log('fetch more called, fetching data : ', foodItem.length)
+      fetchMoreData();
+    }
 
-  // });
+  });
 
-  // if (lastCard != null) {
-  //   observer.observe(lastCard);
-  // }
+  if (lastCard != null) {
+    observer.observe(lastCard);
+  }
 
   const fetchMoreData = () => {
     fetchingData.current=true;
     // console.log("fetching more data... ", fetchingData.current);
-    console.log(foodItem.length)
+    // console.log(foodItem.length)
+    // console.log(page.current)
     const pageno=Math.ceil(foodItem.length/size);
     const url = `${host}/api/fooditem/getFood?page=${pageno+1}&size=${size}`;
-    // page.current++;
     fetch(url)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+        // page.current+=1;
         console.log('setfooditem: ',foodItem)
         console.log('data ', data)
-        if(data && data.length===0){
+        if(data && data.length<3){
           console.log('last object')
           setLoading(false);
           hasMore.current = false.current;
@@ -74,33 +75,6 @@ export default function Grid() {
       });
   }
 
-
-  //get food items
-
-  // useEffect(() => {
-
-  //   let url = `${host}/api/fooditem/getFood?page=${1}&size=${3}`;
-
-  //   fetch(url)
-  //     .then(response => {
-  //       return response.json()
-  //     })
-  //     .then(data => {
-  //       setFoodItem(data);
-  //       setLoading(false);
-
-  //       //set localcart
-  //       console.log('useeffect: ',foodItem)
-
-  //     });
-
-
-  //     //infinite scroll
-  //     setTimeout(() => {
-  //       fetchingData.current=false;
-  //     }, 100);
-
-  // }, [host])
 
   useMemo(() => {
 
@@ -126,34 +100,36 @@ export default function Grid() {
 
 
     
-    const lastCard = document.querySelector('.loading');
-    // console.log(lastCard);
-    const observer = new IntersectionObserver((entries) => {
-      // console.log('is intersecting ',entries[0].isIntersecting)
-      if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
-        // console.log('fetch more called, fetching data : ', foodItem.length)
-        fetchMoreData();
-      }
+    // const lastCard = document.querySelector('.loading');
+    // // console.log(lastCard);
+    // const observer = new IntersectionObserver((entries) => {
+    //   // console.log('is intersecting ',entries[0].isIntersecting)
+    //   if (entries[0].isIntersecting && !fetchingData.current && hasMore.current){
+    //     // console.log('fetch more called, fetching data : ', foodItem.length)
+    //     fetchMoreData();
+    //   }
   
-    });
+    // });
   
-    if (lastCard != null) {
-      observer.observe(lastCard);
-    }
+    // if (lastCard != null) {
+    //   observer.observe(lastCard);
+    // }
 
 
 
 
     console.log('useeffect ',foodItem);
-    page.current=foodItem.length/size;
+    // page.current=foodItem.length/size;
     page.current=Math.ceil(foodItem.length/size);
     console.log('page: ',page.current);
+
+
   },[foodItem])
 
   return (
     <div className='grid-container' style={{
-      backgroundColor: theme ? "rgb(100,100,100)" : "white",
-      color: theme ? "white" : "black",
+      // backgroundColor: theme ? "rgb(100,100,100)" : "white",
+      // color: theme ? "white" : "black",
     }}>
 
       {/* <InfiniteScroll

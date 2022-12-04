@@ -4,7 +4,7 @@ import UrlContext from './urlContext'
 
 function UrlState(props) {
   
-    const url=process.env.REACT_APP_BACKEND_URL||`https://college-canteen-backend.herokuapp.com`;
+    const url=process.env.REACT_APP_BACKEND_URL||`https://good-lime-adder-shoe.cyclic.app`||`https://college-canteen-backend.herokuapp.com`;
     // console.log(process.env.REACT_APP_BACKEND_URL)
     return (
     <div>

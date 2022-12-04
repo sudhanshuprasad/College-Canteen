@@ -56,8 +56,8 @@ export default function Login() {
 
     const googleSSOLogin = (req, res) => {
 
-        const gooleLoginUrl = `http://localhost:5000/api/passport-auth/google`
-        const newWindow = window.open(gooleLoginUrl, '_self', 'height=600,width=500');
+        const googleLoginUrl = `http://localhost:5000/api/passport-auth/google`
+        const newWindow = window.open(googleLoginUrl, '_self', 'height=600,width=500');
     }
 
     useEffect(() => {

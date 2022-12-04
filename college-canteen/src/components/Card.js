@@ -202,6 +202,7 @@ export default function Card(props) {
           <h3>{props.foodName}</h3>
           <h3>&#8377;{props.price}</h3>
         </div>
+        <div>From: {props.shopName}</div>
         <div>{props.dsc}</div>
         <h5 className={!theme?style.light:null}>‎ {/* this is an invisible character */}</h5>
         {/* </Link> */}

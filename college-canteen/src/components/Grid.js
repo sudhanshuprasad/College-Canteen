@@ -167,6 +167,7 @@ export default function Grid() {
                 num={element._id}
                 imgurl="https://picsum.photos/60"
                 foodName={element.name}
+                shopName={element.shopName}
                 price={element.price}
                 dsc={element.dsc}
               />

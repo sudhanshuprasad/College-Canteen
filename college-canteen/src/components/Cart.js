@@ -104,7 +104,7 @@ export default function Cart() {
     return (<div style={{
         backgroundColor: theme ? "rgb(100,100,100)" : "white",
         color: theme ? "white" : "black",
-      }}>
+    }}>
         {!login ?
             <div>you need to login first</div>
             :
@@ -126,7 +126,7 @@ export default function Cart() {
         ))}
         {cart ?
             <>
-                <br/>
+                <br />
                 <button onClick={handleCheckout}>Checkout...</button>
                 <button onClick={handleDelete}>Delete All</button>
                 <div className={style.cartPrice}>Total: &#8377;{cartPrice}</div>

@@ -41,7 +41,7 @@
     background-color: white;
     border-radius: 10px;
 }
- 
+
 #search-bar {
     /* padding: 9px; */
     padding-bottom: 4px;
@@ -90,6 +90,7 @@
     margin: 0px 10px;
     padding: 10px;
 }
+
 #cart {
     filter: invert();
     margin: 0px 10px;
@@ -103,7 +104,7 @@
     right: 18px;
 }
 
-#right li a{
+#right li a {
     text-decoration: none;
 }
 
@@ -131,7 +132,7 @@
     color: white;
 }
 
-#left li a{
+#left li a {
     text-decoration: none;
 }
 
@@ -145,15 +146,26 @@
 } */
 
 
-/* removing search bar */ 
+/* removing search bar */
 @media screen and (max-width:600px) {
-      #search-bar{
+    #search-bar {
         display: none;
-      }
-      #search-area{
-        background-color:rgb(66, 66, 66) ;
-      }
-      #search-icon{
-       filter: invert(100%);
     }
+
+    #search-area {
+        background-color: rgb(66, 66, 66);
+    }
+
+    #search-icon {
+        filter: invert(100%);
+    }
+}
+
+
+
+/* for changing theme */
+.background-dark{
+    background-color: rgb(100,100,100);
+    color: white;
+    /* background-image: linear-gradient(320deg, #272f2f,#3d313d); */
 }

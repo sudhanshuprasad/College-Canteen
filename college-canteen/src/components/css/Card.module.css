@@ -50,13 +50,19 @@
   }
 
   h5 {
-    height: 50px;
+    position: relative;
+    bottom: 20px;
     overflow: hidden;
-    box-shadow: inset 0px -38px 5px -29px rgb(255, 255, 255);
-    z-index: 1;
+    width: 100%;
+    box-shadow: inset 0px -38px 5px -29px rgb(100, 100, 100);
+    z-index: 0;
   }
 
-  h5 div {
+  .light{
+    box-shadow: inset 0px -38px 5px -29px rgb(255, 255, 255);
+  }
+
+  .content div {
     height: 50px;
     overflow: hidden;
     /* background-color: rgb(255, 0, 0); */

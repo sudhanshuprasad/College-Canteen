@@ -2,6 +2,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "dot-env": "^0.0.1",
+    "react-google-button": "^0.7.2",
+    "react-infinite-scroll-component": "^6.1.0",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9"
   }

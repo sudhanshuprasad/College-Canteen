@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreaters } from "../state/index";
 import urlContext from "../context/api_url/urlContext";
+import Axios from 'axios';
 
 
 export default function Navbar() {
@@ -17,6 +18,15 @@ export default function Navbar() {
     const theme = useSelector(state => state.theme);
     const cartSize = useSelector(state => state.cartSize);
 
+
+    if (theme) {
+        // document.body.style = 'background: red;';
+        document.body.classList.add('background-dark');
+    }
+    else {
+        // document.body.style = 'background: green;';
+        document.body.classList.remove('background-dark');
+    }
     // const [login, SetLogin] = useState([Boolean(localStorage.getItem('authToken'))]);
     // let navigate=useNavigate();
     const handleLogout = () => {
@@ -29,25 +39,37 @@ export default function Navbar() {
     useEffect(() => {
         localStorage.getItem('authToken') && dispatch(actionCreaters.setLogin(true));
 
-        if(!localStorage.getItem('authToken')) return
+        if (!localStorage.getItem('authToken')) return
 
         let url = `${host}/api/cart/getCart`;
 
         // if(true||localStorage.getItem('authToken')!==null){
         if (localStorage.getItem('authToken') !== null) {
 
+            // async function fetchUser() {
+            // const axres = await Axios.get(url, {withCredentials:true}).catch((err) => {console.log(err)})
+            // console.log(axres)
+            // }
+            // fetchUser();
+
+            // // same request but with fetch
             fetch(url, {
                 method: 'GET',
                 headers: {
                     'Accept': '*/*',
                     'authToken': localStorage.getItem('authToken')
-                }
+                },
+                // credentials: 'include'
             })
                 .then(response => {
+                    // console.log(response)
                     return response.json()
                 })
                 .then(data => {
-                    console.log(data[0].items);
+                    if (Object.keys(data).length === 0) return
+
+                    // console.log(Object.keys(data).length);
+                    // console.log(data[0].items);
                     dispatch(actionCreaters.setCart(data[0].items));
                     dispatch(actionCreaters.setCartPrice(data.cartPrice));
                     // console.log(data.cartPrice)
@@ -60,8 +82,8 @@ export default function Navbar() {
 
                     dispatch(actionCreaters.setCartSize(cartSize));
                 })
-                .catch(() => {
-                    console.log("some error occured while fetching GET request")
+                .catch((error) => {
+                    console.log("some error occured while fetching GET request", error)
                 });
         }
 
@@ -71,10 +93,12 @@ export default function Navbar() {
         <>
             <div className="sticky-nav">
                 <div className='navbar'>
-                    <ul className='nav-ul' id="left">
-                        <li><Link to="/home"><h2 id="fc">FC</h2></Link></li>
-                        <li><img id='fclogo' src='https://img.icons8.com/color-glass/90/000000/bread-and-rolling-pin.png' alt='fc logo' /></li>
-                    </ul>
+                    <Link style={{textDecoration: 'none'}} to="/home">
+                        <ul className='nav-ul' id="left">
+                            <li><h2 id="fc">FC</h2></li>
+                            <li><img id='fclogo' src='https://img.icons8.com/color-glass/90/000000/bread-and-rolling-pin.png' alt='fc logo' /></li>
+                        </ul>
+                    </Link>
                     {/* {login ? <ul className='nav-ul search-area' id="search-area">
                         <li><input placeholder='Search' type='text' name='search-text' id="search-bar" /></li>
                         <li><img src='https://img.icons8.com/ios-filled/25/000000/search--v1.png' alt='search' id="search-icon" /></li>
@@ -85,7 +109,7 @@ export default function Navbar() {
                         }}>
                             <div className="theme">
                                 <img alt='toggle theme'
-                                    src="https://img.icons8.com/fluency-systems-regular/48/000000/brightness-settings.png"/>
+                                    src="https://img.icons8.com/fluency-systems-regular/48/000000/brightness-settings.png" />
                             </div>
                         </li>
                         {!login ? <li onClick={() => {

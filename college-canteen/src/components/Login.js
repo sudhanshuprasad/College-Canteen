@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import { actionCreaters } from "../state/index";
-import style from './css/Login.module.css'
+import style from './style/Login.module.css'
 
 // const host = "http://127.0.0.1:5000";
 

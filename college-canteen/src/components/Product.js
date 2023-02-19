@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./css/Product.css";
+import "./style/Product.css";
 import { useParams } from 'react-router-dom';
 import urlContext from "../context/api_url/urlContext";
 import { useSelector } from 'react-redux';

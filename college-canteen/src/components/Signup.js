@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
-import "./css/Signup.css"
+import "./style/Signup.css"
 import { actionCreaters } from '../state/index';
 
 // const host = "http://127.0.0.1:5000";

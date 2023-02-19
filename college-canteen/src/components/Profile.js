@@ -4,7 +4,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import { actionCreaters } from "../state/index";
 import { Link } from "react-router-dom"
-import style from "./css/Profile.module.css"
+import style from "./style/Profile.module.css"
 
 function Profile(props) {
 

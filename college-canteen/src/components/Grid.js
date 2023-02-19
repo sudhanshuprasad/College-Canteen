@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import urlContext from '../context/api_url/urlContext';
 // import Card from './Card'
 import LazyCard from './lazy/Card'
-import "./css/Grid.css";
+import "./style/Grid.css";
 import { actionCreaters } from '../state';
 import LoadingGrid from './lazy/LoadingGrid';
 // import InfiniteScroll from 'react-infinite-scroll-component';

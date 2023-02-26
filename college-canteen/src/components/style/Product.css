@@ -5,8 +5,10 @@
 }
 
 .product-image img{
-  width: 50vw;
-  height: 80vh;
+  /* margin-left: 10%; */
+  object-fit: cover;
+  width: 40vw;
+  height: 60vh;
 }
 
 .product-info {

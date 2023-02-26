@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react';
 // import GoogleButton from 'react-google-button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import { actionCreaters } from "../state/index";
@@ -12,6 +12,7 @@ import style from './style/Login.module.css'
 export default function Login() {
 
     const host = useContext(urlContext)
+    const theme = useSelector(state => state.theme);
     const dispatch = useDispatch();
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -65,6 +66,15 @@ export default function Login() {
             navigate('/profile');
         }
     }, [])
+
+    useEffect(()=>{
+        if (!theme) {
+            document.querySelector(`.${style.login_container}`).classList.add(style.background_light);
+        }
+        else {
+            document.querySelector(`.${style.login_container}`).classList.remove(style.background_light);
+        }
+    },[theme])
 
 
     return (

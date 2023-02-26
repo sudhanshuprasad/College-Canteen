@@ -53,6 +53,7 @@ function Product(props) {
             <div className='product-info'>
                 <h1>{product.name}</h1>
                 <p>&#8377;{product.price}</p>
+                <p>From: {product.shopName}</p>
                 <p>{product.dsc}</p>
             </div>
         </div>

@@ -111,7 +111,7 @@ export default function Cart() {
             null
         }
 
-        {login && cart.length == 0 ?
+        {login && cart.length === 0 ?
             <div>your cart is empty</div>
             :
             <div></div>

@@ -66,7 +66,7 @@ export default function Order() {
             ))}
 
             <div>Wait while your food is being prepared</div>
-            <div>Drone delivery will be integrated later</div>
+            <div>Drone delivery will be integrated soon</div>
 
         </>
         )

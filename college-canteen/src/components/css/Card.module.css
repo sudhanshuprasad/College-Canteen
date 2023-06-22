@@ -1,5 +1,5 @@
   .item {
-    border: 10px solid rgb(66, 66, 66);
+    border: 5px solid rgb(66, 66, 66);
     border-radius: 5px;
     transition: 0.3s;
   }

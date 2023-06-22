@@ -58,7 +58,9 @@ function Profile(props) {
 
     return (
         <div className={!theme?style.profile:style.profile_dark}>
+            <h1 className='text-3xl font-bold underline'>
             This is your profile
+            </h1>
             <br></br>
             {params?.user}
             <hr></hr>

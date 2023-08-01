@@ -84,3 +84,7 @@ input:focus ~ .enter_email{
     color: #ffffff86;
     transition: 0.3s;
 }
+
+.background_light{
+    background-image: linear-gradient(320deg, #d5f0f0,#eed5ee);
+}

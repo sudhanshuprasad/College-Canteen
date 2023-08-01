@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreaters } from "../state/index";
-import "./css/CartItem.css";
+import "./style/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
 import { useNavigate } from "react-router-dom";
 import ModifyCart from "../utilities/ModifyCart";

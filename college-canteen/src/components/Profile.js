@@ -4,7 +4,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import urlContext from '../context/api_url/urlContext';
 import { actionCreaters } from "../state/index";
 import { Link } from "react-router-dom"
-import style from "./css/Profile.module.css"
+import style from "./style/Profile.module.css"
 
 function Profile(props) {
 
@@ -64,17 +64,23 @@ function Profile(props) {
             <br></br>
             {params?.user}
             <hr></hr>
-            {userData?.name}<br />
+            <h1>
+                Hello {userData?.name}
+                <img  id={style.profile_pic} src={userData.profileUrl||'https://img.icons8.com/ios/50/null/user-male-circle--v1.png'}></img><br />
+            </h1>
             {userData?.email}<br />
             {userData?.phone}<br />
-            {userData?.timestamp}<br />
+            <br /><br />
+            You joined us at {userData?.timestamp}<br />
             <hr />
             <button className={!theme?style.btn:style.btn_dark} onClick={() => {
                 dispatch(actionCreaters.setThemeDark(!theme));
-            }}>Theme</button>
-            <br></br>
-            <Link to={'/order'}>Order</Link>
-            
+            }}>Change Theme</button>
+            <br/>
+            <button className={!theme?style.btn:style.btn_dark} onClick={()=>{navigate('/order')}}>
+                {/* <Link to={'/order'}>Order</Link> */}
+                My Order
+            </button>
             <hr/>
             
             <button className={!theme?style.btn:style.btn_dark} onClick={handleLogout}>

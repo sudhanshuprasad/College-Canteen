@@ -11,3 +11,14 @@
 .btn_dark{
     background-color: rgb(47, 47, 47);
 }
+
+#profile_pic{
+    float: right;
+    margin-right: 10px;
+}
+
+button{
+    margin: 2% 10% 2% 10%;
+    padding: 10px;
+    width: 80%;
+}

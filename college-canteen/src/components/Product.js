@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./css/Product.css";
+import "./style/Product.css";
 import { useParams } from 'react-router-dom';
 import urlContext from "../context/api_url/urlContext";
 import { useSelector } from 'react-redux';
@@ -53,6 +53,7 @@ function Product(props) {
             <div className='product-info'>
                 <h1>{product.name}</h1>
                 <p>&#8377;{product.price}</p>
+                <p>From: {product.shopName}</p>
                 <p>{product.dsc}</p>
             </div>
         </div>

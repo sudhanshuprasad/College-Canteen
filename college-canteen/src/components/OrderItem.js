@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import "./css/CartItem.css";
+import "./style/CartItem.css";
 import urlContext from "../context/api_url/urlContext";
 
 

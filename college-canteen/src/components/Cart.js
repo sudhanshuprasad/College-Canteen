@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import './css/Login.css';
-import style from './css/Cart.module.css';
+import style from './style/Cart.module.css';
 import CartItem from './CartItem';
 import urlContext from '../context/api_url/urlContext';
 import { Navigate, useNavigate } from 'react-router-dom';
